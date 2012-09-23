@@ -2,6 +2,8 @@ db*
 include.php
 config.php
 *.out
+home/myuploads/uploads/
+home/myuploads/cron_uploads.php
 app_name/
 photos/
 cron*
