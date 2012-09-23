@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<script language="JavaScript">
+
+if (document.images) 
+{
+				img1 = new Image();
+				img2 = new Image();
+				img3 = new Image();
+				img4 = new Image();
+
+				img1.src = "compressed/Emily.jpg";
+				img2.src = "compressed/Ryan.jpg";
+				img3.src = "compressed/Dave.jpg";
+				img4.src = "compressed/Grant.jpg";
+}
+
+function LightEffect(source)
+{
+
+var url =source;
+//parent.document.getElementById('pictureframe').src='http://www.youtube.com/embed/IyByE5t8Fuc';
+//http://www.youtube.com/watch?v=MeofSvI8kJo';
+parent.document.getElementById('pictureframe').src=url;
+document.getElementById('light').style.display='block';
+document.getElementById('fade').style.display='block';
+}
+
+function CloseFrame()
+{
+parent.document.getElementById('pictureframe').src="";
+document.getElementById('light').style.display='none';
+document.getElementById('fade').style.display='none';
+}
+
+function mouseover(itemID)
+{
+
+	//current_overID = itemID;
+	//if (current_overID != last_overID) {
+		//document.getElementById('text2').innerHTML=itemID;
+		
+		if(itemID=="Ryan Jacobs"){	
+		document.getElementById('name').innerHTML=itemID + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="email"><sup>Ryan @ Photo Sharing Network.com</sup></span>';
+			document.getElementById('founders').src="compressed/Ryan.jpg";
+			document.getElementById('bio').style.top="406px";
+			document.getElementById('transparent_bottom').style.height="194px";
+			document.getElementById('desc').innerHTML="Following college at Emory, Ryan launched an innovative student portal concept, founded an event photography company and developed Spiral Entertainment, a large-scale special events production company based in Atlanta. He later joined online audience measurement firm comScore in his hometown of Chicago, where he reported the latest photo sharing trends to photo site clients. Currently, he is wrapping up his MBA/MS joint degree at Michigan focused on Strategy and Sustainable Enterprise.Ryan brings valuable industry and entrepreneurial experience to the team, as well as general business acumen.";
+		}
+		else if(itemID=="Dave Turner"){
+		document.getElementById('name').innerHTML=itemID + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="email"><sup>Dave @ Photo Sharing Network.com</sup></span>';
+			document.getElementById('founders').src="compressed/Dave.jpg";
+			document.getElementById('bio').style.top="450px";
+			document.getElementById('transparent_bottom').style.height="150px";
+			document.getElementById('desc').innerHTML="As an undergrad, Dave focused on computer science engineering and pursued a career in both finance and technology afterward. He also happens to be a stand-up comedian. Dave brings programming ability and his entrepreneurial experience to the Photo Sharing Network. He works with our programmers to develop the Photo Sharing Network software as well as the website interface.";
+		}
+		else if(itemID=="Grant D'Arcy"){
+		document.getElementById('name').innerHTML=itemID + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="email"><sup>Grant @ Photo Sharing Network.com</sup></span>';
+			document.getElementById('founders').src="compressed/Grant.jpg";
+			document.getElementById('bio').style.top="455px";
+			document.getElementById('transparent_bottom').style.height="145px";
+			document.getElementById('desc').innerHTML="Grant graduated from Harvard in 2006 with a degree in Economics. Afterward he worked as a strategist for the Boston Consulting Group (BCG) in Chicago and left to pursue a career at Feeding America, the nation's leading domestic hunger-relief charity. He brings a strong background in strategy and problem solving to the team.";
+		}
+		else{
+		document.getElementById('name').innerHTML=itemID + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="email"><sup>Emily @ Photo Sharing Network.com</sup></span>';
+			document.getElementById('founders').src="compressed/Emily.jpg";
+			document.getElementById('bio').style.top="400px";
+			document.getElementById('transparent_bottom').style.height="200px";
+			document.getElementById('desc').innerHTML="Emily hails from the Live Free or Die state of New Hampshire and has a background that spans both the non-profit world and finance. She is an avid athlete and brings her competitive spirit and tenacity to every endeavor. During her time at Michigan she has focused on developing her strategic foresight and operations competency. She is particularly interested in applying lean manufacturing principles to other disciplines and using lean as an impetus for new product innovation. Emily brings operations expertise and a well rounded business skill set to the table. She has also studied behavior change at the School of Natural Resources and Environment.";
+		}
+		
+df
+		//document.getElementById('text2').style.visibility="visible";
+  //	}
+}
+
+function mouseout()
+{
+		document.getElementById('founders').src="compressed/Founders.jpg";
+		document.getElementById('bio').style.top="470px";
+		document.getElementById('transparent_bottom').style.height="130px";
+		document.getElementById('name').innerHTML="About Us";
+		document.getElementById('desc').innerHTML="The Photo Sharing Network is a real-time photo sharing platform which leverages facial recognition technologies to empower photographers to instantly share photographs without lifting a finger, and SmartPhone users to instantly access pictures taken by others.";
+
+		//document.getElementById('text2').style.visibility="hidden";
+}
+
+</script>
+
+<style type="text/css">
+
+.container {
+	position: relative;
+	width: 900px;
+	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.container_image {
+	width: 100%;
+	height: 600px;
+		
+}
+
+.bio {
+	position: absolute;
+	top: 470px;
+	height: 0px;
+	left: 0px;
+	width: 100%;
+	color: white;
+	background-color: black;	
+}
+
+
+.transparent_bottom{
+	position: absolute;
+	bottom: 0px;
+	height: 130px;
+	width: 100%;
+	left: 0px;
+	color: white;
+	background-color: black;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+
+.header {
+	position: absolute;
+	top: 0px;
+	height: 0px;
+	width: 100%;
+	left: 0px;
+	color: white;
+	background-color: black;
+}
+
+.transparent_top{
+	position: absolute;
+	top: 0px;
+	height: 110px;
+	width: 100%;
+	left: 0px;
+	color: white;
+	background-color: black;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+p {
+	font-family: "Comic Sans MS", sans-serif, serif, "Lucida Grande", Verdana, Arial;
+	font-weight: bold;
+	text-align: justify; 
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 2px;
+	margin-bottom: 4px;
+}
+
+p.title{font-size: xx-large;}
+p.body{}
+
+#email{font-size: medium;}
+
+a { 
+	text-decoration:none 
+	
+}
+
+.black_overlay{
+
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	width: 100%;
+	height: 100%;
+	opacity:.60;
+	filter: alpha(opacity=60);
+}
+
+.white_content{
+
+ 	top: 44%;
+   	left: 49%;
+   	width: 500px;
+   	height: 400px;
+   	margin-top: -200px; /* Half the height */
+   	margin-left: -350px; /* Half the width */
+	
+	display: none;
+	position: absolute;
+	
+	background-color: black;
+	z-index:1002;
+}
+
+
+</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Photo Sharing Network</title>
+</head>
+<body bgcolor="black" link="white" vlink="white" alink="white">
+	<div id='light' class='white_content'>
+<a href='javascript:void(0)' onclick='CloseFrame();'>Close</a> <!–Close button –>
+<iframe id='pictureframe' src="" width="700" height="400"> </iframe></div>”; <!–iframe –>
+</div>
+<!–div the causes fade shadow ovwe web page –>
+<div id='fade' class='black_overlay'>
+</div>
+
+	<div class="container" id="container">	
+	
+			<div class="transparent_top">&nbsp;</div>
+			<div class="header"><p class="title"><span style="color:gray; font-size:large;"> Future home of: </span>Photo Sharing Network</p><p> As we build out our site, get to know our team !</p><p class="body" style="font-size:small">Mouse-over our faces to meet our core team, click <a href='updates/__Our_Resumes.pdf' TARGET="_blank" style="text-decoration:none" onmouseover="this.style.fontSize='15pt'" onmouseout="this.style.fontSize='11pt'" ><u>HERE</u></a> for our resumes, or click <a href='javascript:void(0)' style="text-decoration:none" onclick="LightEffect('http://www.youtube.com/embed/IyByE5t8Fuc')" onmouseover="this.style.fontSize='15pt'" onmouseout="this.style.fontSize='11pt'" ><u>HERE</u></a> for our video introduction.</p></div>
+		
+		<img src="compressed/Founders.jpg" id="founders" class="container_image" usemap="#faces">
+		
+		<map name="faces">
+	<!--		
+  			<area shape="rect" coords="400,130,440,190" href="sun.htm" alt="Sun" class="area" onmouseover="mouseover('Ryan Jacobs')" 		onmouseout="mouseout()"/>  	
+  			<area shape="rect" coords="660,120,710,190" href="sun.htm" alt="Sun" class="area" onmouseover="mouseover('Dave Turner')" 		onmouseout="mouseout()"/>  
+  			<area shape="rect" coords="430,270,480,335" href="sun.htm" alt="Sun" class="area" onmouseover="mouseover('Grant D\'Arcy')" 		onmouseout="mouseout()"/>  	
+  			<area shape="rect" coords="270,240,330,310" href="sun.htm" alt="Sun" class="area" onmouseover="mouseover('Emily Dwinnells')" 		onmouseout="mouseout()"/>  	
+  		-->		
+  	
+  			<area shape="rect" coords="400,130,440,190" onmouseover="mouseover('Ryan Jacobs')" 		onmouseout="mouseout()"/>  	
+  			<area shape="rect" coords="660,120,710,190" onmouseover="mouseover('Dave Turner')" 		onmouseout="mouseout()"/>  
+  			<area shape="rect" coords="430,270,480,335" onmouseover="mouseover('Grant D\'Arcy')" 		onmouseout="mouseout()"/>  	
+  			<area shape="rect" coords="270,240,330,310" onmouseover="mouseover('Emily Dwinnells')" 		onmouseout="mouseout()"/>  	
+  
+		</map>
+		<div class="transparent_bottom" id="transparent_bottom">&nbsp;</div>
+		<div class="bio" id="bio"><p id="name" class="title">About Us</p><p id="desc" class="body">The Photo Sharing Network is a real-time photo sharing platform which leverages facial recognition technologies to empower photographers to instantly share photographs without lifting a finger, and SmartPhone users to instantly access pictures taken by others.</p></div>
+	</div>
+	
+	
+</body>
+</html>

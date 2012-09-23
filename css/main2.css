@@ -1,0 +1,250 @@
+/* CSS Document */
+
+
+* {
+	padding:0px;
+	margin:0px;
+}
+
+body {
+	background-color:#445772;
+	color:#fff;
+	font-family:UbuntuFont;
+}
+
+@font-face
+{
+font-family: UbuntuFont;
+src: url('/css/Ubuntu-R.ttf'), url('/css/Ubuntu-R.eot'); 
+}
+
+.thumb_container {
+	xheight: 300px;
+	width:  300px;
+	vertical-align:top;
+	float:left;
+	xborder: solid #DDD 1px;
+	margin: 0 8px 8px 0px;
+    padding: 5px;
+}
+
+.overlay_allpics {
+	background-color: #999999;
+    color: #FFFFFF;
+    font-size: 10px;
+    left: 50px;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    z-index: 100;
+}
+
+.overlay_mypics, .overlay_download {
+	background-color: #999999;
+    color: #FFFFFF;
+    font-size: 10px;
+    left: 5px;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    z-index: 100;
+}
+
+.thumb_div {
+	position:relative;
+	top:0px;
+	left:0px;
+}
+
+
+.album_title {
+    background: none repeat scroll 0 0 #333333;
+    color: #FFFFFF;
+    padding: 5px 0 5px 10px;
+}
+
+.topnavigation a {
+	color: #FFFFFF;
+}
+
+.topnavigation {
+	color: #FFFFFF;
+	margin-left:15px;
+	margin-bottom:20px;
+	float:left;
+}
+
+.pagination a {
+	color: #FFFFFF;
+}
+
+.pagination {
+	color: #FFFFFF;
+	margin-left:15px;
+	margin-bottom:20px;
+	float:right;
+	margin-right:15px;
+}
+
+.mainmessage {
+	color:#FFF;	
+	margin-left:15px;
+	margin-top:15px;
+}
+
+.ui-widget-content {
+	color:#FFF;	
+}
+
+
+.frame_options a {
+	color: #FFFFFF;
+}
+
+.frame_options {
+	color: #FFFFFF;
+	margin-left:80px;
+	margin-bottom:20px;
+	float:left;
+}
+
+.simplemodal-overlay {
+	xwidth:98% !important;
+}
+
+
+
+.mainwrapper {
+	width:960px;
+}
+
+.header {
+	margin-top:20px;	
+	width:900px;
+}
+
+.smallcontentheader, .contentheader {
+	text-align:left;
+	width:900px;
+}
+
+.smallcontentheader_wrapper, .contentheader_wrapper {
+	background-image:url(/img/site/smallcontent-header.gif);
+	background-repeat:repeat-x;
+	height:52px;
+}
+
+.currenttab {
+    background-image: url("/img/site/current-tab.gif");
+    background-repeat: no-repeat;
+    float: left;
+	font-size: 18px;
+    height: 52px;
+    padding-top: 16px;
+    text-align: center;
+    width: 212px;
+}
+
+.othertab {
+	 background-image: url("/img/site/other-tab.gif");
+    background-repeat: no-repeat;
+    float: left;
+	font-size: 18px;
+    height: 30px;
+    padding-top: 16px;
+    text-align: center;
+    width: 230px;
+	margin-left:10px;
+}
+
+.smallcontentwrapper, .contentwrapper  {
+	padding-bottom:20px;
+	min-height:400px;
+	background-color:#546e8f;
+}
+
+
+.smallcontent, .content {
+	padding-left:10px;
+	padding-top:40px;
+	width:900px;
+}
+
+.content {
+	padding-top:20px;
+	width:900px;
+}
+
+.smallcontentfooter, .contentfooter  {
+	background-image:url(/img/site/smallcontent-footer.gif);
+	background-repeat:repeat-x;
+	height:24px;
+}
+
+
+.registerbox {
+	float:left;	
+	width:400px;
+	height:400px;
+}
+
+.loginbox {
+	float:left;
+	width:400px;
+	margin-left:60px;
+	height:400px;
+}
+
+h1 {
+	background-color:#637b99;	
+	padding:3px;
+	text-align:left;
+	font-size:25px;	
+}
+
+h2 {
+	font-size:20px;	
+	text-align:left;
+}
+
+.clear {
+	clear:both;
+	
+}
+
+.smallcontent table tr {
+	height:70px;
+	vertical-align:middle;
+}
+
+.smallcontent input {
+	height:30px;
+	width:282px;
+	font-size:20px;
+	margin-left:8px;
+}
+
+.button  {
+	background-image: url("/img/site/button-small.gif");
+    background-repeat: no-repeat;
+    float: right;
+    font-size: 20px;
+    height: 41px;
+    margin-left: 8px;
+    padding-top: 8px;
+    text-align: center;
+    vertical-align: middle;
+    width: 120px;
+}
+
+.button:hover {
+	background-image:url("/img/site/button-pressed-small.gif");
+	cursor:pointer;
+}
+
+.smallcontent a {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+

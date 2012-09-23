@@ -1,0 +1,8 @@
+db*
+include.php
+config.php
+*.out
+app_name/
+photos/
+cron*
+test*
