@@ -19,7 +19,7 @@ if(isset($_REQUEST['ec']))
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Photo Sharing Network</title>
+<title>a Photo Sharing Network</title>
 
 <link rel="stylesheet" type="text/css" href="./css/main.css" />
 <?php if( $detect->isMobile() ) : ?>
