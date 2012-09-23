@@ -137,7 +137,7 @@ In order to identify the pictures you're in, we need to first see some photos of
 </p>
 
 <div class="setup_option">
-<a href="javascript:void(0);" onclick="alert('Coming Soon')"> 
+<a href="javascript:void(0);" onclick="alert('We re still building this feature. In the meantime, please use the FB Login.')"> 
 <div class="bigbutton" style="padding-top:20px; height:56px">Upload Photos</div>
 </a> <br />
 
@@ -154,11 +154,11 @@ In order to identify the pictures you're in, we need to first see some photos of
 </div>
 
 <div class="clear"></div>         
-
+<!--
 <p class="skip">
 <a href="/home">Skip this step</a>
 </p>
-
+-->
 <div class="clear"></div>  
 
 <!--<small>Debug: <?php echo $_SESSION["email"] ?></small>-->

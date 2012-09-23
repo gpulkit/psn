@@ -52,9 +52,23 @@ if(isset($_SESSION["fb_id"])) {
 
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+		parent.document.getElementById('pictureframe').src='<?php echo "soon.html";?>';
+		document.getElementById('light').style.display='block';
+		document.getElementById('fade').style.display='block';
+    });
+</script>
+
 </head>
 
 <body>
+
+<div id='light' class='white_content'>
+<iframe id='pictureframe' src="" width="700" height="400"> </iframe>
+</div>
+<div id='fade' class='black_overlay'>
+</div>
 
 <div align="center">
 

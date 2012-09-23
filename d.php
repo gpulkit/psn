@@ -25,12 +25,20 @@ if(isset($_REQUEST['f']))
 		<br><font size='8'>
 		This photo and others 
 		<br>
-		Now accessible on:
+		will be accessible on:
 		<br>
 		<font size='5'><br></font>
 		<a href='http://www.emorypartypics.com' style='text-decoration:none' target='_parent'><font size='5'>www. </font>Emory Party Pics<font size='5'> .com</font></a>
 		</font>
+		<font
 		</div>";
+		/*
+		Message for the slacker next to
+you who hasn't registered yet:
+You can do so now.
+We brought laptops; find us.
+	*/
+
 		echo "</body>";
 	}
 }

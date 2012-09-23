@@ -3,7 +3,6 @@ session_start();
 require_once("../lib2.php");
 require_once("../FaceRestClient.php");
 //initialize API object with API key and Secret
-$api = new FaceRestClient("c45dbceec1d94202d005734c71363936","2ddbc75fca8ee82a41f4c64dd7d40751");
 if(isset($_SESSION["user_id"])) {
 	$user_id = $_SESSION["user_id"];
 }
@@ -80,12 +79,13 @@ function toggle(n)
 </script>
 
 <script type="text/javascript">
-$(document).ready(function(){
+/*$(document).ready(function(){
 		parent.document.getElementById('pictureframe').src='<?php echo "soon".$n.".html";?>';
 		document.getElementById('light').style.display='block';
 		document.getElementById('fade').style.display='block';
-    });
+    });*/
 </script>
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -127,7 +127,6 @@ Photo Sharing Network
 
 <?php printUserPictures($user_id, $page); ?>
  
-
 <div class="clear"></div>         
 </div> 
 </div>

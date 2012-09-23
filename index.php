@@ -19,7 +19,7 @@ if(isset($_REQUEST['ec']))
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>a Photo Sharing Network</title>
+<title>Photo Sharing Network</title>
 <link rel="stylesheet" type="text/css" href="./css/main.css" />
 <?php if( $detect->isMobile() ) : ?>
 	<link rel="stylesheet" type="text/css" href="./css/mobile_main.css" />
@@ -220,7 +220,8 @@ Returning user? <a href='login.php'> <u>Login</u> </a>
 </div> 
 </div>
 
-<div class="homecontentfooter"></div>    
+<div class="homecontentfooter"></div>
+<span style="color:grey;font-size:11px;"><br/>Want PSN at your event? Please e-mail ryan (at) emorypartypictures.com</span>    
 </div>
 
 <script type="text/javascript">
