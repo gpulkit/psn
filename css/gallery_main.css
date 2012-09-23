@@ -1,0 +1,142 @@
+/* CSS Document */
+
+body {
+	xborder: 1px solid #DDDDDD;
+	background: none repeat scroll 0 0 #546E8F;
+	padding:0px;
+	margin:0px;
+	color:#fff;
+}
+
+.thumb_container {
+	xheight: 300px;
+	width:  300px;
+	vertical-align:top;
+	float:left;
+	xborder: solid #DDD 1px;
+	margin: 0 8px 8px 0px;
+    padding: 5px;
+}
+
+.overlay_allpics {
+	background-color: #999999;
+    color: #FFFFFF;
+    font-size: 10px;
+    left: 50px;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    z-index: 100;
+}
+
+.overlay_mypics, .overlay_download {
+	background-color: #999999;
+    color: #FFFFFF;
+    font-size: 10px;
+    left: 5px;
+    padding: 3px;
+    position: absolute;
+    top: 5px;
+    z-index: 100;
+}
+
+.thumb_div {
+	position:relative;
+	top:0px;
+	left:0px;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1.4em 0.5em;
+}
+
+.ui-tabs {
+	 padding: 5px;
+}
+
+
+.ui-widget-content {
+	border:none;
+}
+
+.ui-tabs .ui-tabs-panel {
+   background: none repeat scroll 0 0 #546E8F;
+   border: 2px solid #FFFFFF;
+}
+
+.ui-tabs .ui-tabs-nav {
+    margin: 0;
+    padding:0;
+}
+
+.ui-widget-header {
+	 background: none repeat scroll 0 0 #546E8F;
+	 border:none;
+}
+
+.ui-widget-content {
+	background:	none repeat scroll 0 0 #546E8F;
+}
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+    xbackground: none repeat scroll 0 0 #546E8F;
+	xborder: 2px solid #FFFFFF;
+	xborder-bottom:none;
+	xcolor:#FFFFFF;
+    cursor: pointer;
+}
+
+.album_title {
+    background: none repeat scroll 0 0 #333333;
+    color: #FFFFFF;
+    padding: 5px 0 5px 10px;
+}
+
+.topnavigation a {
+	color: #FFFFFF;
+}
+
+.topnavigation {
+	color: #FFFFFF;
+	margin-left:15px;
+	margin-bottom:20px;
+	float:left;
+}
+
+.pagination a {
+	color: #FFFFFF;
+}
+
+.pagination {
+	color: #FFFFFF;
+	margin-left:15px;
+	margin-bottom:20px;
+	float:right;
+	margin-right:15px;
+}
+
+.mainmessage {
+	color:#FFF;	
+	margin-left:15px;
+	margin-top:15px;
+}
+
+.ui-widget-content {
+	color:#FFF;	
+}
+
+
+.frame_options a {
+	color: #FFFFFF;
+}
+
+.frame_options {
+	color: #FFFFFF;
+	margin-left:80px;
+	margin-bottom:20px;
+	float:left;
+}
+
+.simplemodal-overlay {
+	xwidth:98% !important;
+}

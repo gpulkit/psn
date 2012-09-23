@@ -1,0 +1,85 @@
+.homecontent input {
+	height:30px;
+	width:200px;
+	font-size:20px;
+	margin-left:8px;
+}
+
+.registerbox {
+	width:100%;
+	height:400px;
+	text-align:left;
+	float:none;
+	margin-left:0px;
+}
+
+h1 {
+	width:90%;
+}
+
+.loginbox {
+	width:100%;
+	margin-left:0px;
+	height:100px;
+	text-align:left;
+	float:none;
+}
+
+.homecontentheader, .contentheader , .setupcontentheader{
+	text-align:left;
+	width:100%;
+}
+
+.homecontent {
+	width:100%;
+	text-align:left;
+}
+
+.header {
+	width:100%;
+}
+
+.homecontent .button {
+	float:left;
+}
+
+.setup_option {
+	float:none; 
+	width:300px; 
+	text-align:center;	
+	margin-top:20px;
+}
+
+.setupbox {
+	float:left;
+	width:100%;
+	text-align:left;
+	margin-left:10px;
+}
+
+.content {
+	padding-left:10px;
+	width:100%;
+	margin-left:0px;
+}
+
+.setupcontent {
+	width:100%;
+	text-align:left;
+}
+
+.setupcontent .skip {
+	float:left;
+}
+
+p {
+	width:90%;
+}
+
+.setupcontent  .bigbutton {
+	margin-left:0px;
+}
+
+.setupcontent  .small {
+	text-align:left;
+}
