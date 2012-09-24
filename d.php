@@ -15,7 +15,7 @@ if(isset($_REQUEST['f']))
 	{
 		$row = mysql_fetch_array($result);
 		$event_id = $row['event_id'];
-		$image_link = $s3->getAuthenticatedURL($bucket,'photos/'.$event_id.'/'.$image_id.'.jpg', 20, false, false);
+		$image_link = $s3->getAuthenticatedURL($bucket,'processed/'.$event_id.'/'.$image_id.'.jpg', 20, false, false);
 		echo "<body bgcolor='black' text='white' alink='white' vlink='white' link='white'>";
 		echo "
 		<br><br>
