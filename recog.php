@@ -5,7 +5,7 @@ require_once('./phpThumb/phpthumb.class.php');
 $app_dir = './process';
 require_once('./process/orgs.php');
 
-$event = 11;
+$event = 12;
 search();
 
 function search()
@@ -50,8 +50,17 @@ function search()
 					$mailer_email->Subject = 'A new photo of you has been posted to your Photo Sharing Network account';
 
 					$mailer_sms_3 = new PHPMailer();
-					$mailer_sms_3->FromName = 'Photo Sharing Network';
-					$mailer_sms_3->From = 'Photos@PhotoSharingNetwork.com';
+                                        $mailer_sms_3->IsSMTP(); // enable SMTP
+                                        $mailer_sms_3->SMTPSecure = 'ssl';
+                                        $mailer_sms_3->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+                                        $mailer_sms_3->SMTPAuth = true;  // authentication enabled
+                                        $mailer_sms_3->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+                                        $mailer_sms_3->Host = 'smtp.gmail.com';
+                                        $mailer_sms_3->Port = 465; 
+                                        $mailer_sms_3->Username = 'gupta.pukit89@gmail.com';  
+                                        $mailer_sms_3->Password = 'tgip0518';           
+					//$mailer_sms_3->FromName = 'Photo Sharing Network';
+					$mailer_sms_3->From = 'gupta.pulkit89@gmail.com';
 					$mailer_sms_3->addBCC("gupta.pulkit89@gmail.com","Pulkit Gupta");
 					$mailer_sms_3->AddAddress($row['phnumber'].'@txt.att.net');
 					$mailer_sms_3->AddAddress($row['phnumber'].'@tmomail.net');
@@ -131,7 +140,7 @@ function search()
 										$mailer_sms_3->Body .= "
 										Click on the link above to view.";
 										
-										if($row['sms']){
+										if($row['phnumber']!=''){
 											if(!$mailer_sms_3->Send())
 											{
 												echo "<br>SMS was not sent";
@@ -209,10 +218,10 @@ function read_event_folder($event)
 
 function process($event,$file)
 {
-	$gentxt = 
-	"Parent Cocktail Reception
-	      UM Museum of Art
-	        April 26th, 2012";
+$gentxt = 
+"Dis-O: MBA Celebration
+      Blau Auditorium
+      April 25th, 2012";
 	      
 	$left='./process/UM_Logo.jpg';
 	$right='./process/PSN.jpg';

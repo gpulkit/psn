@@ -28,6 +28,11 @@
 				}
 			}
 		}
+		$query = "DELETE FROM event_images WHERE event_id = '$event_id'";
+		$result2 = mysql_query($query);
+		if($result2==0) {
+				echo mysql_error($conn);
+		}
 
 		$query = "DELETE FROM users_events WHERE event_id = '$event_id'";
 		$result2 = mysql_query($query);

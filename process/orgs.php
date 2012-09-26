@@ -151,7 +151,7 @@ function genTag($pic1, $pic2, $txt, $ret=false) {
 		}
 	}
 
-	$font = $appdir. "/times_new_roman_bold.ttf";
+	$font = "./times_new_roman_bold.ttf";
 /*
 	$bbox = imagettfbbox(11, 0, $font, $txt);
 	$txth = $bbox[1] - $bbox[7];

@@ -1,6 +1,6 @@
 <?php
 require_once('lib2.php');
-$result = mysql_query('SELECT user_id from users');
+$result = mysql_query('SELECT * from users');
 if($result == 0)
 	mysql_error($result,$conn);
 else
@@ -9,7 +9,7 @@ else
 	{
 		
 		$user_id = $row['user_id'];
-		echo $user_id.'<br/>';
+		echo $row['name'].'<br/>';
 		printUserPictures($user_id);
 
 	}
