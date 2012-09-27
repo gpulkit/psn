@@ -33,10 +33,10 @@ if(isset($_SESSION["fb_id"])) {
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="./uploadify/jquery.uploadify.min.js"></script>
 
-<!--<script type="text/javascript" src="/gallery/js/jquery-1.7.2.min.js" ></script>-->
-<script type='text/javascript' src='/../../js/jquery.simplemodal.js'></script>
-<script type='text/javascript' src='/../../js/gallery7.js'></script>
-<script type="text/javascript" src="/../../js/jquery-ui-1.8.19.custom.min.js" ></script>
+<!--<script type="text/javascript" src="../../js/jquery-1.7.2.min.js" ></script>-->
+<script type='text/javascript' src='../../js/jquery.simplemodal.js'></script>
+<script type='text/javascript' src='../../js/gallery7.js'></script>
+<script type="text/javascript" src="../../js/jquery-ui-1.8.19.custom.min.js" ></script>
 
 <script type="text/javascript">
 
@@ -50,6 +50,25 @@ if(isset($_SESSION["fb_id"])) {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("input").live('keyup',function(e){
+	if(e.keyCode == 13) {
+		//alert('dfs');
+    	$.ajax({
+     		type: 'GET',
+     		url: './face_invitation.php?u='+<?php echo $user_id ?>+'&v='+$(this).val()+'&f='+$(this).attr('id'),
+     		success: function(data1){
+     			//alert(data1);
+				
+     		}
+     	})
+     	$(this).parents('tr').remove();
+	}
+  });
+});
 </script>
 
 </head>
@@ -70,6 +89,7 @@ Photo Sharing Network
 
 <div class="contentheader_wrapper"><div class="contentheader">
 
+
 <div class="othertab"><a href="../../home">Photos of Me</a></div>
 <div class="othertab"><a href="../../home/galleries">Extended Galleries</a></div>
 <div class="currenttab"><a href="../../home/myuploads" >My Uploads</a></div>
@@ -78,10 +98,23 @@ Photo Sharing Network
 <div class="contentwrapper"> 
 <div class="content">
 
-<p><a href="./upload.php"><div class="bigbutton" style="padding-top:20px">Upload photos</div></a></p>
+<div class="uploadbox" >
+<h1>Upload multiple photos</h1>
+<br/>
+<table>
+<form>
+		<tr><div id="queue1"></div></tr>
+		<tr><input id="file_upload" name="file_upload" type="file" multiple="true"></tr>
+</form>
+</table>
+</div>
 <div class="message"></div>
 <div style="height:200px;" class="pictures">
-<?php printUserUploads($user_id); ?>
+<table>
+<div class="faces">
+	<div> Face invitation<br/> </div>
+</div>
+</table>
 </div>
 
 <div class="clear"></div> 
@@ -106,6 +139,34 @@ Photo Sharing Network
 		
 </script>
 
+	<script type="text/javascript">
+		
+		<?php $timestamp = time();?>
+		$(function() {
+			$('#file_upload').uploadify({
+				'formData'     : {
+					'timestamp' : '<?php echo $timestamp;?>',
+					'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+				},
+				//'debug'	: true,
+				'fileTypeDesc' : 'Image Files',
+				'swf'      : './uploadify/uploadify.swf',
+				'uploader' : './uploadify/uploadify.php',
+				'onUploadSuccess' : function(file, data, response) {
+				            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+				           	$.ajax({
+				            		type: 'GET',
+				            		url: './database2.php?u='+<?php echo $user_id ?>+'&file='+file.name,
+				            		success: function(data1){
+				            			alert(data1);
+				       					$('div.faces').append(data1);
+				            		}
+
+				            	})
+				       }
+			});
+		});
+	</script>
 
 </div>
 </body>
