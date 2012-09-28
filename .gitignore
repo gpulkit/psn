@@ -1,3 +1,5 @@
+*.JPG
+*.jpg
 db*
 include.php
 config.php

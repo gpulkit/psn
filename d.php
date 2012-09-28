@@ -28,7 +28,7 @@ if(isset($_REQUEST['f']))
 		will be accessible on:
 		<br>
 		<font size='5'><br></font>
-		<a href='http://www.emorypartypics.com' style='text-decoration:none' target='_parent'><font size='5'>www. </font>Emory Party Pics<font size='5'> .com</font></a>
+		<a href='http://www.madtownphotosharing.com' style='text-decoration:none' target='_parent'><font size='5'>www. </font>Mad Town Photo Sharing<font size='5'> .com</font></a>
 		</font>
 		<font
 		</div>";

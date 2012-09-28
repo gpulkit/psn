@@ -1,11 +1,12 @@
 <?php
+require_once('./twilio-php/Services/Twilio.php');
 require_once './src/class.phpmailer.php';
 require_once './lib2.php';
 require_once('./phpThumb/phpthumb.class.php');
 $app_dir = './process';
 require_once('./process/orgs.php');
 
-$event = 12;
+$event = 11;
 search();
 
 function search()
@@ -14,6 +15,10 @@ function search()
 	global $fb_token;
 	global $event;
 	global $conn;
+        global $AccountSid;
+        global $AuthToken;
+        global $from;
+        $client = new Services_Twilio($AccountSid, $AuthToken);
 	
 	$query_str = "SELECT * FROM users INNER JOIN users_events ON users.email = users_events.email WHERE users_events.event_id ='$event'";
 	
@@ -141,13 +146,17 @@ function search()
 										Click on the link above to view.";
 										
 										if($row['phnumber']!=''){
-											if(!$mailer_sms_3->Send())
+                                                                                    $to = $row['phnumber'];
+        	                                                                    $body ="You've got a new photo!\nwww.photosharingnetwork.com/d.php?f=$image_id\nClick on the link above to view.";
+
+                                                                                        $client->account->sms_messages->create($from, $to, $body);
+											//if(!$mailer_sms_3->Send())
 											{
 												echo "<br>SMS was not sent";
 												echo "<br>Mailer Error: " . $mailer_sms_3->ErrorInfo;
 												//exit;
 											}
-											else
+											//else
 												echo "<br>SMS sent<br/>";
 
 										}
@@ -223,7 +232,7 @@ $gentxt =
       Blau Auditorium
       April 25th, 2012";
 	      
-	$left='./process/UM_Logo.jpg';
+	$left='./process/GammaPhi.jpg';
 	$right='./process/PSN.jpg';
 	genTag($left,$right,$gentxt);
 	$gentxt = str_replace("\n", '__n__', $gentxt);

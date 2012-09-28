@@ -204,7 +204,10 @@ function printEvents($email=0, $page = 1) {
 		$row2 = mysql_fetch_array($result2, MYSQL_ASSOC);
 
 	    $timestamp = timestamp();
-	    $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/'.$eventid.'/'.$row2["event_cover"], $timestamp, false, false);	
+            if($row2['event_cover'] == 'NewGallery.JPG')
+    	        $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/'.$row2["event_cover"], $timestamp, false, false);	
+            else
+	        $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/'.$eventid.'/'.$row2["event_cover"], $timestamp, false, false);	
 	    $description = "No description";
 	    $title = $row2["event_name"];
 	
