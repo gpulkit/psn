@@ -1,7 +1,8 @@
 <?php 
 session_start(); 
 header("Cache-Control: no-store, no-cache, must-revalidate"); 
-include("./Mobile_Detect.php");
+require_once("./Mobile_Detect.php");
+require_once('config.php');
 $detect = new Mobile_Detect();
 if(isset($_SESSION["user_id"])) {
 	header('Location: ./home/');
@@ -9,9 +10,18 @@ if(isset($_SESSION["user_id"])) {
 
 if(isset($_REQUEST['ec']))
 {
-	$ec = $_REQUEST['ec'];
+	$ec = mysql_real_escape_string($_REQUEST['ec']);
 }
 
+if(isset($_REQUEST['u']))
+{
+	$campus_id = mysql_real_escape_string($_REQUEST['u']);
+	$result2 = mysql_query("SELECT * FROM orgs WHERE campus_id = '$campus_id'");
+}
+
+$result = mysql_query("SELECT * FROM campuses");
+if($result == 0)
+	mysql_error($conn);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -53,10 +63,15 @@ if(isset($_REQUEST['ec']))
   	var y=document.forms["registerform"]["password1"].value;
   	var z=document.forms["registerform"]["password2"].value;
   	var w=document.forms["registerform"]["phone"].value;
+  	var v=document.forms["registerform"]["univs"].value;
+  	var u=document.forms["registerform"]["orgs"].value;
+
   	$('td.e_u').html('');
   	$('td.e_p1').html('');
   	$('td.e_p2').html('');
   	$('td.e_ph').html('');
+  	$('td.e_orgs').html('');
+  	$('td.e_univs').html('');
   	if(i==1)
   	{
   		j=1;
@@ -77,6 +92,16 @@ if(isset($_REQUEST['ec']))
 	{
 		$('td.e_p2').html('Required field');
 	  	//error = error + 'Confirm Password field empty.<br/>'
+	  	success = false;
+	}
+	if (v==null || v=="0")
+	{
+		$('td.e_univs').html('Required field');
+	  	success = false;
+	}
+	if (u==null || u=="0")
+	{
+		$('td.e_orgs').html('Required field');
 	  	success = false;
 	}
 
@@ -168,13 +193,49 @@ Photo Sharing Network
 <tr>	
 	<td>cell</td> <td><input name="phone" type="text" />   </td> <td class='e_ph'></td>
 </tr>
+<tr style="<?php if(isset($campus_id)) echo 'display:none;'?>">
+	<td>univ</td>
+	<td>
+		<select name='univs' class="univs">
+			<?php
+				echo "<option value='0'>Select your University</option>";
+				while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
+				{
+					$id = $row['campus_id'];
+					$name = $row['campus_name'];
+					if(isset($campus_id) && $campus_id == $id)
+						echo "<option value='$id' selected='selected'>$name</option>";
+					else
+						echo "<option value='$id' >$name</option>";
+				}
+			?>
+		</select>
+	</td>
+	<td class='e_univs'></td>
+</tr>
 <tr>
-	<td> <span style="display: <?php if(isset($ec)) echo 'none'; else echo 'block';?>">event<br/> code</span></td> <td><input style="display: <?php if(isset($ec)) echo 'none'; else echo 'block';?>" name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/>   </td>
+	<td>greek</td>
+	<td>
+		<select name='orgs' class='orgs'>
+			<?php
+				echo "<option value='0'>Select your Greek society</option>";
+				while ($row = mysql_fetch_array($result2, MYSQL_ASSOC)) 
+				{
+					$id = $row['org_id'];
+					$name = $row['org_name'];
+					echo "<option value='$id'>$name</option>";
+				}
+			?>
+		</select>
+	</td>
+	<td class='e_orgs'></td>
+</tr>
+<tr style="<?php if(isset($ec)) echo 'display:none;'?>">
+	<td>event<br/> code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td>
 </tr>
 <tr>
 	<td></td>
-	<input style="display:none" type="submit" name='submit1'	 />
-
+	<input style="display:none" type="submit" name='submit1'/>
 	<td>
 		<a href="javascript:void(0);" onclick="validate_form(0)"> 
 			<div class="button">Register </div>
@@ -185,38 +246,7 @@ Photo Sharing Network
 </form>
 Returning user? <a href='login.php'> <u>Login</u> </a>
 </div>
-<!--
-<div class="loginbox">
-<h1>Returning Users</h1>
-
-
-<form id="loginform" method="post" action="./actions/login2.php">
-<table>
-<tr>
-<td> <h2>email </h2></td> <td> <input name="username" type="text" />  </td>
-</tr>
-<tr>
-<td> <h2>password </h2></td> <td> <input name="password" type="password" />  </td>
-</tr>
-<tr>
-<td>&nbsp;   </td> <td>&nbsp;   </td>
-</tr>
-</table>
-
-<input style="display:none" type="submit"	 />
-
-<a href="javascript:void(0);" onclick="document.forms['loginform'].submit()"> 
-<div class="button">Login</div>
-</a>
-
-</form>
-
-</div>
--->
 <div class="clear"></div>         
-          
-
-
 </div> 
 </div>
 
@@ -237,6 +267,27 @@ Returning user? <a href='login.php'> <u>Login</u> </a>
 			"./img/site/button-pressed-small.gif"
 		)
 		
+</script>
+<script type="text/javascript">
+$('.univs').change(function() {
+    var id = $(this).val();
+	$.ajax({
+			async: false,
+			type: 'GET',
+			url: './org.php?c='+id,
+			success: function(data){
+				if (data=="")
+				{
+					
+				}	
+				else
+				{
+					//alert(data);
+					$('.orgs').html(data);		  			
+				}
+			}
+		})
+});
 </script>
 
 </div>

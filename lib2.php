@@ -355,7 +355,7 @@ function checkPasswords($password1, $password2) {
 	}
 }
 
-function doRegister($ecode, $username, $password1, $password2, $phone="") {
+function doRegister($ecode, $username, $password1, $password2, $phone="", $univ, $org) {
 	
 	global $conn;
 	global $bucket;
@@ -363,12 +363,20 @@ function doRegister($ecode, $username, $password1, $password2, $phone="") {
 	$un = mysql_real_escape_string($username);
 	$ps = md5($password1);
 	$ph = mysql_real_escape_string($phone);
-	$result = mysql_query("INSERT INTO users (email, password, phnumber) VALUES ('$un','$ps','$ph')", $conn);
+	$univ = mysql_real_escape_string($univ);
+	$org_id = mysql_real_escape_string($org);
+
+	$result = mysql_query("INSERT INTO users (email, password, phnumber, org_id) VALUES ('$un','$ps','$ph','$org_id')", $conn);
 	$id = mysql_insert_id($conn);
 	
 	if($ecode == '010')
 	{
 		$result = mysql_query("INSERT INTO users_events (email, event_id) VALUES ('$un',10)");
+	}
+
+	if($ecode == '013')
+	{
+		$result = mysql_query("INSERT INTO users_events (email, event_id) VALUES ('$un',13)");
 	}
 
 	if($id) {

@@ -1,3 +1,6 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate"); 
+?>
 /* CSS Document */
 
 * {
@@ -180,12 +183,12 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 
 .homecontentwrapper, .contentwrapper, .setupcontentwrapper  {
 	padding-bottom:20px;
-	min-height:470px;
+	min-height:580px;
 	background-color:#546e8f;
 	/*background-color:#ffffff;*/
 }
 
-.e_u, .e_p1, .e_p2, .e_ph {
+.e_u, .e_p1, .e_p2, .e_ph, .e_orgs, .e_univs {
 	padding-left:10px;
 	color : red;
 }
@@ -262,10 +265,17 @@ h2 {
 	vertical-align:middle;
 }
 
-.homecontent input {
+.homecontent input{
 	height:20px;
 	width:220px;
 	font-size:10px;
+	margin-left:8px;
+}
+
+.homecontent select{
+	height:20px;
+	width:227px;
+	font-size:20px;
 	margin-left:8px;
 }
 
