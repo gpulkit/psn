@@ -12,11 +12,12 @@ if(isset($_REQUEST['u']))
 	{
 		if(mysql_num_rows($result) == 0)
 		{
-
+			//send email
+			//add to face
 		}
 		else
 		{
-
+			
 		}
 	}
 }

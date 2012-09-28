@@ -75,7 +75,6 @@
 									$uid = $tag->uids[0]->uid;
 									$conf = $tag->uids[0]->confidence;
 									if ($conf >= 60){ 
-										//echo "<br><br>Recognized in for UID ".$row['fb_id']. " confidence: ".$conf."<br/>";
 										$query_str = "INSERT INTO pictures (image_id, user_id, event) VALUES ('$image_id','$user_id',0)";
 										
 										$result2 = mysql_query($query_str);

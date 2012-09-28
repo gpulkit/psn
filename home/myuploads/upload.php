@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include_once("../../lib2.php");
+require_once("../../lib2.php");
 
 if(isset($_SESSION["user_id"])) {
 	$user_id = $_SESSION["user_id"];
@@ -17,6 +17,26 @@ if(isset($_SESSION["fb_id"])) {
 	$fb_id = $_SESSION["fb_id"];
 }
 
+//Google Contact API
+$client = new apiClient();
+$client->setApplicationName('Google Contacts PHP Sample');
+$client->setScopes("http://www.google.com/m8/feeds/");
+$client->setClientId($clientid);
+$client->setClientSecret($clientsecret);
+$client->setRedirectUri($redirecturi);
+$client->setDeveloperKey($developerkey);
+$auth = $client->createAuthUrl();
+
+if (isset($_GET['code'])) {
+  $client->authenticate();
+  $_SESSION['token'] = $client->getAccessToken();
+  $req = new apiHttpRequest("https://www.google.com/m8/feeds/contacts/default/full?max-results=5000");
+  $val = $client->getIo()->authenticatedRequest($req);
+  $xml =  new SimpleXMLElement($val->getResponseBody());
+  $xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
+  $result = $xml->xpath('//gd:email');
+  $_SESSION['token'] = $client->getAccessToken();
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -38,6 +58,41 @@ if(isset($_SESSION["fb_id"])) {
 <script type='text/javascript' src='../../js/gallery7.js'></script>
 <script type="text/javascript" src="../../js/jquery-ui-1.8.19.custom.min.js" ></script>
 
+
+<link type="text/css" href="../../jquery-ui/css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="Stylesheet" />	
+<script type="text/javascript" src="../../jquery-ui/js/jquery-ui-1.8.23.custom.min.js"></script>
+<!-- jquery-ui  <script type="text/javascript" src="../../jquery-ui/js/jquery-1.8.0.min.js"></script> -->
+
+<?php 
+
+if (isset($_GET['code'])) {
+	/*
+			$( "input" ).autocomplete({
+			source: availableTags
+		});
+		*/
+  	echo '
+
+	<script>
+	$(function() {
+		var availableTags = [';
+			 foreach ($result as $title) {
+  				echo '"'.$title->attributes()->address.'",';
+			 }
+		echo '
+		];
+
+		$( "input").live( "focus", function(){
+		      $(this).autocomplete({
+					source: availableTags
+				}).focus();
+		      return false;
+		});
+	});
+	</script>';
+}
+
+?>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -62,7 +117,6 @@ $(document).ready(function(){
      		url: './face_invitation.php?u='+<?php echo $user_id ?>+'&v='+$(this).val()+'&f='+$(this).attr('id'),
      		success: function(data1){
      			//alert(data1);
-				
      		}
      	})
      	$(this).parents('tr').remove();
@@ -112,7 +166,9 @@ Photo Sharing Network
 <div style="height:200px;" class="pictures">
 <table>
 <div class="faces">
+	<input type='text'/>
 	<div> Face invitation<br/> </div>
+	<?php echo '<a href="'.$auth.'"> Auto-Complete </a>';?>
 </div>
 </table>
 </div>
