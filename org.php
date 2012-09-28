@@ -13,10 +13,10 @@ if(isset($_REQUEST['c']))
 	{
 		$count = mysql_num_rows($result);
 		if($count == 0)
-			echo "<option value='0'>Please select your Greek society.</option>";
+			echo "<option value='0'>Select your Greek society</option>";
 		else
 		{
-			echo "<option value='0'>Please select your Greek society.</option>";
+			echo "<option value='0'>Select your Greek society</option>";
 		  	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
 		  	{
 		  		$id = $row['org_id'];
