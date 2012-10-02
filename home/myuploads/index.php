@@ -27,7 +27,7 @@ if(isset($_SESSION["fb_id"])) {
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Photo Sharing Network</title>
 <link rel="stylesheet" type="text/css" href="./uploadify/uploadify.css" />
-<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/main.css??" />
 <link type='text/css' href='../../css/gallery.css' rel='stylesheet' media='screen' />
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
