@@ -30,7 +30,7 @@ if($result == 0)
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Photo Sharing Network</title>
-<link rel="stylesheet" type="text/css" href="./css/main.css?" />
+<link rel="stylesheet" type="text/css" href="./css/main.css??" />
 <?php if( $detect->isMobile() ) : ?>
 	<link rel="stylesheet" type="text/css" href="./css/mobile_main.css" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
@@ -214,7 +214,7 @@ Photo Sharing Network
 	<td class='e_univs'></td>
 </tr>
 <tr>
-	<td>Campus Affiliation</td>
+	<td>Campus<br/> Affiliation</td>
 	<td>
 		<select name='orgs' class='orgs'>
 			<?php
@@ -230,7 +230,7 @@ Photo Sharing Network
 	</td>
 	<td class='e_orgs'></td>
 </tr>
-<tr style="<?php if(isset($ec)) echo 'display:none;'?>">
+<tr style="<?php /*if(isset($ec))*/ echo 'display:none;'?>">
 	<td>Event Code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td><td>(Optional)</td>
 </tr>
 <tr>
