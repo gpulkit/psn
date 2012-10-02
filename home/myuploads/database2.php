@@ -145,9 +145,9 @@
 			if (!S3::putObjectFile($path, $bucket,'faces/'.$face_id.'.jpg')){
 				echo "Failed to upload file to S3.<br/>";
 			}
-			$timestamp = 500;
-			$url = $s3->getAuthenticatedURL($bucket,'faces/'.$face_id.'.jpg', $timestamp,false, false);	
-			echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" color="grey" value="Enter email_address here to share..."/></td></tr>';
+			//$timestamp = 500;
+			//$url = $s3->getAuthenticatedURL($bucket,'faces/'.$face_id.'.jpg', $timestamp,false, false);	
+			//echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" color="grey" value="Enter email_address here to share..."/></td></tr>';
 		}
 		
 		imagedestroy($dest);

@@ -26,18 +26,48 @@ $client->setClientId($clientid);
 $client->setClientSecret($clientsecret);
 $client->setRedirectUri($redirecturi);
 $client->setDeveloperKey($developerkey);
+$client->setAccessType('offline');
 $auth = $client->createAuthUrl();
 
-if (isset($_GET['code'])) {
-  $client->authenticate();
-  $_SESSION['token'] = $client->getAccessToken();
-  $req = new apiHttpRequest("https://www.google.com/m8/feeds/contacts/default/full?max-results=5000");
-  $val = $client->getIo()->authenticatedRequest($req);
-  $xml =  new SimpleXMLElement($val->getResponseBody());
-  $xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
-  $result = $xml->xpath('//gd:email');
-  $_SESSION['token'] = $client->getAccessToken();
+if(!isset($token))
+{
+	$token_result = mysql_query("SELECT gat FROM users WHERE user_id = '$user_id'");
+	$row = mysql_fetch_array($token_result,MYSQL_ASSOC);
+	
+
+	if(isset($row['gat']))
+	{
+		$token = $row['gat'];
+        $client->refreshToken($token);  
+		$req = new apiHttpRequest("https://www.google.com/m8/feeds/contacts/default/full?max-results=5000");
+	  	$val = $client->getIo()->authenticatedRequest($req);
+	  	$xml =  new SimpleXMLElement($val->getResponseBody());
+	  	$xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
+	  	$result = $xml->xpath('//gd:email');
+	  	//$token = $client->getAccessToken();
+	  	
+	}
+	else if(isset($_GET['code'])) {
+	  $client->authenticate();
+	  $token = $client->getAccessToken();
+	  $client->setAccessToken($token);
+	  $authObj = json_decode($token);
+	  $refreshToken = $authObj->refresh_token;
+	  //echo $refreshToken;
+	  //echo $token;
+	  $error = mysql_query("UPDATE users SET gat = '$refreshToken' WHERE user_id = '$user_id'");
+	  if($error == 0)
+	  	mysql_error($conn);
+	  $req = new apiHttpRequest("https://www.google.com/m8/feeds/contacts/default/full?max-results=5000");
+	  $val = $client->getIo()->authenticatedRequest($req);
+	  $xml =  new SimpleXMLElement($val->getResponseBody());
+	  $xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
+	  $result = $xml->xpath('//gd:email');
+	  $token = $client->getAccessToken();
+	}
 }
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -47,7 +77,7 @@ if (isset($_GET['code'])) {
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Photo Sharing Network</title>
 <link rel="stylesheet" type="text/css" href="./uploadify/uploadify.css" />
-<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/main.css?" />
 <link type='text/css' href='../../css/gallery.css' rel='stylesheet' media='screen' />
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -59,15 +89,14 @@ if (isset($_GET['code'])) {
 <script type="text/javascript" src="../../js/jquery-ui-1.8.19.custom.min.js" ></script>
 
 
-<link type="text/css" href="../../jquery-ui/css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="Stylesheet" />	
-<script type="text/javascript" src="../../jquery-ui/js/jquery-ui-1.8.23.custom.min.js"></script>
+<link type="text/css" href="../../jquery-ui-2/css/ui-lightness/jquery-ui-1.8.24.custom.css" rel="Stylesheet" />	
+<script type="text/javascript" src="../../jquery-ui-2/js/jquery-ui-1.8.24.custom.min.js"></script>
 <!-- jquery-ui  <script type="text/javascript" src="../../jquery-ui/js/jquery-1.8.0.min.js"></script> -->
 
 <?php 
 
-if (isset($_GET['code'])) {
+if (isset($token)) {
   	echo '
-
 	<script>
 	$(function() {
 		var availableTags = [';
@@ -117,54 +146,8 @@ $(document).ready(function(){
      	$(this).parents('tr').remove();
 	}
   });
-	/*		 
-  $("select.option").change(function(){
-  	//var id = $(this).children(":selected").attr("id");
-  	//alert($(this).val());
-  	var val = $(this).val();
-  	if(val == 1)
-  	{
-  		$("div.option").html('');
-  		$("div.option").append("Album Name: <input type='text' name='album_name'/>");
-  		$("div.collab_events").css('display', 'none');
-  		$("select.collab_events").val('0');
-  	}
-  	else if(val == 2)
-  	{
-  		$("div.option").html('');
-  		$("div.collab_events").css('display', 'none');
-  		$("select.collab_events").val('0');
-  	}
-  	else if(val == 3)
-  	{
-  		$("div.option").html('');
-  		$("div.collab_events").css('display', 'block');
-  	}
-  	else
-  	{
-
-  		$("div.option").html('');
-  		$("div.collab_events").css('display', 'none');
-  		$("select.collab_events").val('0');
-  	}
-  });
-
-    $("select.collab_events").change(function(){
-  	var val = $(this).val();
-  	if(val == 0)
-  	{
-  		$("div.uploadbox").css('display', 'none');
-  	}
-  	else
-  	{
-  		$("div.uploadbox").css('display', 'block');
-  	}
-
-  });
-
-
 });
-*/
+
 </script>
 
 </head>
@@ -193,49 +176,33 @@ Photo Sharing Network
 
 <div class="contentwrapper"> 
 <div class="content">
-<!--
-	<select class="option">
-		<option value='0'> Please select an option </option>
-		<option value='1'> Upload to new collaborative album </option>
-		<option value='2'> Upload to dump </option>
-		<option value='3'> Upload to existing collaborative album </option>
-	</select>
-<div class="option">	
-</div>
-<div class="collab_events" style='display:none;'>
-	<?php
-	/*
-	echo "<select class='collab_events'>";
-	echo "<option value='0'>Please select the collab album</option>";
-while($row = mysql_fetch_array($result_events, MYSQL_ASSOC))
-{
-	$event_id = $row['event_id'];
-	$event_name = $row['event_name'];
-	echo "<option value='$event_id'>$event_name</option>";
-
-}
-echo "</select>";
-*/
-?>
-</div>
--->
-<?php echo '<a href="'.$auth.'"> Auto-Complete </a>';?>
 <div class="uploadbox">
 <h1><u>Upload</u> and <u>Easily Share</u> photos</h1>
 <br/>
-<table>
 <div>Placeholder for explanation</div>
 <div> Please select photos to privately share (and to securely store online in your private PSN account).</div>
-<form>
+<div class="status">
+</div>
+
+<div class="uploadbutton">
+<form class="uploadbutton">
 		<tr><div id="queue1"></div></tr>
 		<tr><input id="file_upload" name="file_upload" type="file" multiple="true"></tr>
 </form>
-</table>
+<div class="moreuploads" style="display:none;">Upload More Photos from
+a Different Folder after the previous upload completes.</div>
 </div>
+</div>
+
+
 <div class="message"></div>
 <div style="height:200px;" class="pictures">
 <table>
 <div class="faces">
+<div class = "link" style="display: <?php if(isset($token)) echo 'none'; else echo 'block';?>"> 
+<?php echo '<a href="'.$auth.'" > Enable Auto-Complete with Gmail Contacts </a>';?>
+</div>
+<iframe class="faces" src='faces.php?u=<?php echo $user_id ?>' width="300" height="400"> </iframe>
 </div>
 </table>
 </div>
@@ -263,7 +230,9 @@ echo "</select>";
 </script>
 
 	<script type="text/javascript">
-		
+		var count = 0;
+		var current = 0;
+		var folders = -1;
 		<?php $timestamp = time();?>
 		$(function() {
 			$('#file_upload').uploadify({
@@ -275,18 +244,58 @@ echo "</select>";
 				'fileTypeDesc' : 'Image Files',
 				'swf'      : './uploadify/uploadify.swf',
 				'uploader' : './uploadify/uploadify.php',
+				'onDialogClose'  : function(queueData) {
+						if(queueData.filesQueued != 0)
+						{
+				            $('#file_upload').uploadify('disable', true);
+				            $('div.moreuploads').show();
+
+				            //alert(queueData.filesQueued + ' files were queued of ' + queueData.filesSelected + ' selected files. There are ' + queueData.queueLength + ' total files in the queue.');
+				            count = queueData.filesQueued;
+				            current = 0;
+				            folders  = folders +1;
+				            /*
+				            $( "#file_upload-button" ).css('height','0');
+				            $( "#file_upload-button" ).css('width','0');
+				            $( ".uploadify-button-text" ).html('');
+				            */
+				            $('div.status').append('<div class="status_'+folders+'"></div>')
+				            $('div.status').append('<div class="status_'+folders+'_num">Uploading 0/'+count+'.</div>')
+				            $(function() {
+				            		$( "div.status_"+folders).progressbar({
+				            			value: 0
+				            		});
+				            	});
+				        }
+				        },
 				'onUploadSuccess' : function(file, data, response) {
 				            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
 				           	$.ajax({
 				            		type: 'GET',
 				            		url: './database2.php?u='+<?php echo $user_id ?>+'&file='+file.name,
 				            		success: function(data1){
-				            			alert(data1);
-				       					$('div.faces').append(data1);
+				            			current = current +1;
+				            			//alert(data1);
+				       					//$('div.faces').append(data1);
+				       					$('iframe.faces').attr("src", $('iframe.faces').attr("src"));
+				       					$(function() {
+				       							$("div.status_"+folders).progressbar(
+				       								"value",(current*100/count)
+				       							);
+				       							$("div.status_"+folders+"_num").html('Uploading'+current+'/'+count + '.')
+				       							if(current == count)
+				          							$('#file_upload').uploadify('disable', false);
+				       						});
+				       					
 				            		}
 
 				            	})
-				       }
+				          	
+				       },
+				'onQueueComplete' : function(queueData) {
+				          
+				      }
+
 			});
 		});
 	</script>
