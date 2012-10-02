@@ -107,7 +107,7 @@ if($event) {
 */
 	printEventPictures($event,$page);
 } else {
-	printEvents($email, $page);
+	printEvents($email, $user_id, $page);
 }
 
 ?>

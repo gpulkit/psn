@@ -231,7 +231,7 @@ Photo Sharing Network
 	<td class='e_orgs'></td>
 </tr>
 <tr style="<?php if(isset($ec)) echo 'display:none;'?>">
-	<td>Event Code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td>
+	<td>Event Code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td><td>(Optional)</td>
 </tr>
 <tr>
 	<td></td>
