@@ -16,6 +16,7 @@ $fb_id = 0;
 if(isset($_SESSION["fb_id"])) {
 	$fb_id = $_SESSION["fb_id"];
 }
+$result_events = mysql_query("SELECT * FROM events WHERE collab = 1 AND event_id = ANY (SELECT event_id FROM users_events WHERE email = (SELECT email FROM users WHERE user_id = '$user_id'))");
 
 //Google Contact API
 $client = new apiClient();
@@ -38,7 +39,6 @@ if (isset($_GET['code'])) {
   $_SESSION['token'] = $client->getAccessToken();
 }
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -66,11 +66,6 @@ if (isset($_GET['code'])) {
 <?php 
 
 if (isset($_GET['code'])) {
-	/*
-			$( "input" ).autocomplete({
-			source: availableTags
-		});
-		*/
   	echo '
 
 	<script>
@@ -122,7 +117,54 @@ $(document).ready(function(){
      	$(this).parents('tr').remove();
 	}
   });
+	/*		 
+  $("select.option").change(function(){
+  	//var id = $(this).children(":selected").attr("id");
+  	//alert($(this).val());
+  	var val = $(this).val();
+  	if(val == 1)
+  	{
+  		$("div.option").html('');
+  		$("div.option").append("Album Name: <input type='text' name='album_name'/>");
+  		$("div.collab_events").css('display', 'none');
+  		$("select.collab_events").val('0');
+  	}
+  	else if(val == 2)
+  	{
+  		$("div.option").html('');
+  		$("div.collab_events").css('display', 'none');
+  		$("select.collab_events").val('0');
+  	}
+  	else if(val == 3)
+  	{
+  		$("div.option").html('');
+  		$("div.collab_events").css('display', 'block');
+  	}
+  	else
+  	{
+
+  		$("div.option").html('');
+  		$("div.collab_events").css('display', 'none');
+  		$("select.collab_events").val('0');
+  	}
+  });
+
+    $("select.collab_events").change(function(){
+  	var val = $(this).val();
+  	if(val == 0)
+  	{
+  		$("div.uploadbox").css('display', 'none');
+  	}
+  	else
+  	{
+  		$("div.uploadbox").css('display', 'block');
+  	}
+
+  });
+
+
 });
+*/
 </script>
 
 </head>
@@ -151,11 +193,39 @@ Photo Sharing Network
 
 <div class="contentwrapper"> 
 <div class="content">
+<!--
+	<select class="option">
+		<option value='0'> Please select an option </option>
+		<option value='1'> Upload to new collaborative album </option>
+		<option value='2'> Upload to dump </option>
+		<option value='3'> Upload to existing collaborative album </option>
+	</select>
+<div class="option">	
+</div>
+<div class="collab_events" style='display:none;'>
+	<?php
+	/*
+	echo "<select class='collab_events'>";
+	echo "<option value='0'>Please select the collab album</option>";
+while($row = mysql_fetch_array($result_events, MYSQL_ASSOC))
+{
+	$event_id = $row['event_id'];
+	$event_name = $row['event_name'];
+	echo "<option value='$event_id'>$event_name</option>";
 
-<div class="uploadbox" >
-<h1>Upload multiple photos</h1>
+}
+echo "</select>";
+*/
+?>
+</div>
+-->
+<?php echo '<a href="'.$auth.'"> Auto-Complete </a>';?>
+<div class="uploadbox">
+<h1><u>Upload</u> and <u>Easily Share</u> photos</h1>
 <br/>
 <table>
+<div>Placeholder for explanation</div>
+<div> Please select photos to privately share (and to securely store online in your private PSN account).</div>
 <form>
 		<tr><div id="queue1"></div></tr>
 		<tr><input id="file_upload" name="file_upload" type="file" multiple="true"></tr>
@@ -166,9 +236,6 @@ Photo Sharing Network
 <div style="height:200px;" class="pictures">
 <table>
 <div class="faces">
-	<input type='text'/>
-	<div> Face invitation<br/> </div>
-	<?php echo '<a href="'.$auth.'"> Auto-Complete </a>';?>
 </div>
 </table>
 </div>
