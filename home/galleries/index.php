@@ -28,12 +28,11 @@ if(isset($_GET["p"])) {
 	$page = $_GET["p"];
 }
 
-$event = 0;
 if(isset($_GET["e"])) {
 	$event = $_GET["e"];
-	$n = mysql_num_rows(mysql_query("SELECT * FROM users_events WHERE email = '$email' AND event_id = '$event'"));
-	if($n == 0)
-		header('Location: .');
+	//$n = mysql_num_rows(mysql_query("SELECT * FROM users_events WHERE email = '$email' AND event_id = '$event'"));
+	//if($n == 0)
+		//header('Location: .');
 }
 
 ?>
@@ -98,14 +97,14 @@ Photo Sharing Network
  
 <?php
 
-if($event) {
+if(isset($event)) {
 /*
 	echo "
 	<script type='text/javascript'>
 		showEvent(".$event.");
 	</script>";
 */
-	printEventPictures($event,$page);
+	printEventPictures($user_id, $event,$page);
 } else {
 	printEvents($email, $user_id, $page);
 }

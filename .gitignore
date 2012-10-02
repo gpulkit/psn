@@ -2,7 +2,7 @@
 *.jpg
 db*
 include.php
-config.php
+/config.php
 *.out
 home/myuploads/uploads/
 home/myuploads/cron_uploads.php
