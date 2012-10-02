@@ -52,14 +52,6 @@ if(isset($_SESSION["fb_id"])) {
 
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-		parent.document.getElementById('pictureframe').src='<?php echo "soon.html";?>';
-		document.getElementById('light').style.display='block';
-		document.getElementById('fade').style.display='block';
-    });
-</script>
-
 </head>
 
 <body>
@@ -78,24 +70,15 @@ Photo Sharing Network
 
 <div class="contentheader_wrapper"><div class="contentheader">
 
-<div class="currenttab"><a href="../../home/myuploads" >My Uploads</a></div>
 <div class="othertab"><a href="../../home">Photos of Me</a></div>
 <div class="othertab"><a href="../../home/galleries">Extended Galleries</a></div>
+<div class="currenttab"><a href="../../home/myuploads" >My Uploads</a></div>
 </div></div>
 
 <div class="contentwrapper"> 
 <div class="content">
 
-<div class="uploadbox" >
-<h1>Upload multiple photos</h1>
-<br/>
-<table>
-<form>
-		<tr><div id="queue1"></div></tr>
-		<tr><input id="file_upload" name="file_upload" type="file" multiple="true"></tr>
-</form>
-</table>
-</div>
+<p><a href="./upload.php"><div class="bigbutton" style="padding-top:20px">Upload photos</div></a></p>
 <div class="message"></div>
 <div style="height:200px;" class="pictures">
 <?php printUserUploads($user_id); ?>
@@ -124,34 +107,6 @@ Photo Sharing Network
 		
 </script>
 
-	<script type="text/javascript">
-		
-		<?php $timestamp = time();?>
-		$(function() {
-			$('#file_upload').uploadify({
-				'formData'     : {
-					'timestamp' : '<?php echo $timestamp;?>',
-					'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
-				},
-				//'debug'	: true,
-				'fileTypeDesc' : 'Image Files',
-				'swf'      : './uploadify/uploadify.swf',
-				'uploader' : './uploadify/uploadify.php',
-				'onUploadSuccess' : function(file, data, response) {
-				            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-				           	$.ajax({
-				            		type: 'GET',
-				            		url: './database.php?u='+<?php echo $user_id ?>+'&file='+file.name,
-				            		success: function(data1){
-				            			//alert(data1);
-				       					$('div.pictures').html(data1);
-				            		}
-
-				            	})
-				       }
-			});
-		});
-	</script>
 
 </div>
 </body>
