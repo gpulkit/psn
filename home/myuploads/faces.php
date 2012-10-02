@@ -68,10 +68,18 @@ $(document).ready(function(){
 		</script>';
 
 	}
+        echo 'Easy Share Assist <br/>';
 
 	$result = mysql_query("SELECT face_id FROM faces WHERE image_id = ANY (SELECT image_id FROM useruploads WHERE user_id = '$user_id') AND email IS NULL ORDER BY face_id DESC");
 	if($result == 0)
 		echo mysql_error($conn);
+        $count = mysql_num_rows($result);
+        echo $count.' outstanding faces<br/>';
+
+        if(mysql_num_rows($result) == 0)
+        {
+            return;
+        }
 	echo '<table>';
 	while($row = mysql_fetch_array($result,MYSQL_ASSOC))
 	{
