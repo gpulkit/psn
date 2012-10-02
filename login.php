@@ -27,7 +27,7 @@ if(isset($_REQUEST['w']))
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Photo Sharing Network</title>
 
-<link rel="stylesheet" type="text/css" href="./css/main.css" />
+<link rel="stylesheet" type="text/css" href="./css/main.css??" />
 <?php if( $detect->isMobile() ) : ?>
 	<link rel="stylesheet" type="text/css" href="./css/mobile_main.css" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
