@@ -9,7 +9,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 }
 
 body {
-	background-color:#445772;
+	background-color: #555555;
+	/*background-color:#445772;*/
 	color:#fff;
 	font-family:UbuntuFont;
 }
@@ -152,13 +153,13 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 }
 
 .homecontentheader_wrapper, .contentheader_wrapper, .setupcontentheader_wrapper {
-	background-image:url(../img/site/smallcontent-header.gif);
+	background-image:url(../img/site/smallcontent-header.gif?);
 	background-repeat:repeat-x;
 	height:52px;
 }
 
 .currenttab {
-    background-image: url("../img/site/current-tab.gif");
+    background-image: url("../img/site/current-tab.gif?");
     background-repeat: no-repeat;
     float: left;
 	font-size: 18px;
@@ -170,7 +171,7 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 }
 
 .othertab {
-	 background-image: url("../img/site/other-tab.gif");
+	 background-image: url("../img/site/other-tab.gif?");
     background-repeat: no-repeat;
     float: left;
 	font-size: 18px;
@@ -184,7 +185,8 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 .homecontentwrapper, .contentwrapper, .setupcontentwrapper  {
 	padding-bottom:20px;
 	min-height:580px;
-	background-color:#546e8f;
+	/*background-color:#546e8f;*/
+	background-color:#6B6B6B;
 	/*background-color:#ffffff;*/
 }
 
@@ -193,7 +195,7 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	color : red;
 }
 .homecontent {
-	padding-left:290px;
+	padding-left:275px;
 	padding-top:0px;
 	width:960px;
 	/*background-color:#fffff0;*/
@@ -207,7 +209,7 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 }
 
 .homecontentfooter, .contentfooter, .setupcontentfooter  {
-	background-image:url(../img/site/smallcontent-footer.gif);
+	background-image:url(../img/site/smallcontent-footer.gif?);
 	background-repeat:repeat-x;
 	height:24px;
 }
@@ -241,7 +243,8 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 }
 
 h1 {
-	background-color:#637b99;	
+	/*background-color:#637b99;*/	
+	background-color:#838383;	
 	padding:3px;
 	text-align:left;
 	font-size:25px;	
@@ -250,7 +253,8 @@ h1 {
 
 
 h2 {
-	background-color:#637b99;	
+	/*background-color:#637b99*/;	
+	background-color:#838383;	
 	font-size:20px;	
 	text-align:left;
 }
@@ -280,7 +284,7 @@ h2 {
 }
 
 .button  {
-	background-image: url("../img/site/button-small.gif");
+	background-image: url("../img/site/button-small.gif?");
     background-repeat: no-repeat;
     font-size: 20px;
     height: 41px;
@@ -290,12 +294,12 @@ h2 {
     width: 120px;
 }
 .button:hover {
-	background-image:url("../img/site/button-pressed-small.gif");
+	background-image:url("../img/site/button-pressed-small.gif?");
 	cursor:pointer;
 }
 
 .bigbutton  {
-	background-image: url("../img/site/button.gif");
+	background-image: url("../img/site/button.gif?");
     background-repeat: no-repeat;
     font-size: 20px;
     height: 66px;
@@ -305,7 +309,7 @@ h2 {
     width: 194px;
 }
 .bigbutton:hover {
-	background-image:url("../img/site/button-pressed.gif");
+	background-image:url("../img/site/button-pressed.gif?");
 	cursor:pointer;
 }
 
