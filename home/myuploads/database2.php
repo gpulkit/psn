@@ -127,10 +127,10 @@
 		$dest = imagecreatetruecolor($X_face, $Y_face);
 		
 		imagecopy($dest,$src,0,0, $X_pos, $Y_pos, $X_face, $Y_face);
-		
+	        	
 		//header('Content-Type: image/jpeg');
 		$path = './uploads/'.$file_name.'_'.$count.'.jpg';
-		imagegif($dest,$path);
+		imagejpeg($dest,$path,20);
 		
 		$query = "INSERT INTO faces (image_id) VALUES ('$image_id')";
 		$result = mysql_query($query);

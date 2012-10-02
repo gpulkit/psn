@@ -22,13 +22,13 @@ function timestamp()
 	return $timestamp;
 }
 
-function printUserPictures($user_id = 0, $page = 1, $folder = "processed") {
+function printUserPictures($user_id = 0, $page = 1, $folder = "photos") {
 
 	$pictures_per_page = 48;	
 	global $conn;
 	global $s3;
 	global $bucket;
-	$result = mysql_query("SELECT *  FROM pictures WHERE user_id = '$user_id' AND event = '1' ", $conn);
+	$result = mysql_query("SELECT *  FROM pictures WHERE user_id = '$user_id'", $conn);
 	if($user_id == 0) {
 		$count = 0;
 	} 
@@ -82,8 +82,16 @@ function printUserPictures($user_id = 0, $page = 1, $folder = "processed") {
 
 		$i++;
 		$timestamp = timestamp();
-	  	$image_link = $s3->getAuthenticatedURL($bucket,$folder.'/'.$event_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);
-		$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_'.$folder.'/'.$event_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
+                if($row['event'] == 1)
+                {
+	  	    $image_link = $s3->getAuthenticatedURL($bucket,$folder.'/'.$event_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);
+		    $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_'.$folder.'/'.$event_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
+                }
+                else 
+                {
+	  	    $image_link = $s3->getAuthenticatedURL($bucket,'uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);
+		    $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
+                }
 		$description = "No description";
 		$title = "Full Image";
 	

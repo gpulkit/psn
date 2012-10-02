@@ -33,7 +33,6 @@ if(!isset($token))
 {
 	$token_result = mysql_query("SELECT gat FROM users WHERE user_id = '$user_id'");
 	$row = mysql_fetch_array($token_result,MYSQL_ASSOC);
-	
 
 	if(isset($row['gat']))
 	{
@@ -77,7 +76,7 @@ if(!isset($token))
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Photo Sharing Network</title>
 <link rel="stylesheet" type="text/css" href="./uploadify/uploadify.css" />
-<link rel="stylesheet" type="text/css" href="../../css/main.css?" />
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
 <link type='text/css' href='../../css/gallery.css' rel='stylesheet' media='screen' />
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -200,7 +199,7 @@ a Different Folder after the previous upload completes.</div>
 <table>
 <div class="faces">
 <div class = "link" style="display: <?php if(isset($token)) echo 'none'; else echo 'block';?>"> 
-<?php echo '<a href="'.$auth.'" > Enable Auto-Complete with Gmail Contacts </a>';?>
+<?php echo '<a href="'.$auth.'" ><img src="example.jpg"></img></a>';?>
 </div>
 <iframe class="faces" src='faces.php?u=<?php echo $user_id ?>' width="300" height="400"> </iframe>
 </div>
