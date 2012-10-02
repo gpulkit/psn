@@ -107,6 +107,7 @@ Photo Sharing Network
 </div>
 
 <div class="contentfooter"></div> 
+<span style="color:grey;font-size:11px;"><br/>Interested in learning more about PSN?  Event coverage, beta tests, jobs, technology partnerships, questions?  Ryan (at) photosharingnetwork.com</span>   
 
 <script type="text/javascript">
 

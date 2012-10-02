@@ -1,4 +1,5 @@
 <?php
+set_time_limit(3000);
 require_once('./twilio-php/Services/Twilio.php');
 require_once './src/class.phpmailer.php';
 require_once './lib2.php';
@@ -6,7 +7,7 @@ require_once('./phpThumb/phpthumb.class.php');
 $app_dir = './process';
 require_once('./process/orgs.php');
 
-$event = 11;
+$event = 13;
 search();
 
 function search()
@@ -149,7 +150,7 @@ function search()
                                                                                     $to = $row['phnumber'];
         	                                                                    $body ="You've got a new photo!\nwww.photosharingnetwork.com/d.php?f=$image_id\nClick on the link above to view.";
 
-                                                                                        $client->account->sms_messages->create($from, $to, $body);
+                                                                                        //$client->account->sms_messages->create($from, $to, $body);
 											//if(!$mailer_sms_3->Send())
 											{
 												echo "<br>SMS was not sent";
@@ -227,10 +228,14 @@ function read_event_folder($event)
 
 function process($event,$file)
 {
+/*
+$gentxt =
+"Alpha Epsilon Phi - Phi Stock 
+        Indiana University
+      September 29th, 2012";*/
 $gentxt = 
-"Dis-O: MBA Celebration
-      Blau Auditorium
-      April 25th, 2012";
+"Grilled Cheese with the G Phi B's
+        September 27th, 2012";
 	      
 	$left='./process/GammaPhi.jpg';
 	$right='./process/PSN.jpg';

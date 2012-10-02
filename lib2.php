@@ -380,7 +380,13 @@ function doRegister($ecode, $username, $password1, $password2, $phone="", $univ,
 	if($ecode == '013')
 	{
 		$result = mysql_query("INSERT INTO users_events (email, event_id) VALUES ('$un',13)");
+	}	
+        
+        if($ecode == '014')
+	{
+		$result = mysql_query("INSERT INTO users_events (email, event_id) VALUES ('$un',14)");
 	}
+
 
 	if($id) {
 		if (S3::putObject(
