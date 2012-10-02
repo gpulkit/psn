@@ -187,16 +187,32 @@ function printEvents($email=0, $page = 1) {
 		echo mysql_error($conn);
 	}
 	$count = mysql_num_rows($result);
-	
+	/*
 	//*******************
 	// Print empty folder message
 	//*******************
+	
 	if($count==0) {
 		echo '<div class="mainmessage">Nothing here yet!</div>';
 		echo '<div style="clear:both"></div>';
 		return;
-	}
+	}*/
+	$timestamp = 500;
+	$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/NewGallery.JPG', $timestamp, false, false);
 	echo '<div style="clear:both"></div>';
+
+		echo '<div class="thumb_container">';
+	    echo '<div class="thumb_div">';
+	    echo '<div class="album_title">';
+	    echo 'My Uploads';
+	    echo '</div>';
+	    echo '<div class="thumb_pic_album">';
+	    echo '<a class="thumb" href="./?e=0" >';
+            echo '<img src="'.$thumb_link.'" title="My uploads" /><br/>';
+	    echo '</a>';
+	    echo '</div>';
+	    echo '</div>';
+	    echo '</div>';
 
 	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 		$eventid = $row['event_id'];
@@ -226,7 +242,7 @@ function printEvents($email=0, $page = 1) {
 	mysql_free_result($result);
 }
 
-function printEventPictures($event_id, $page = 1, $folder = "processed") {
+function printEventPictures($user_id, $event_id, $page = 1, $folder = "processed") {
 	
 	$pictures_per_page = 100;
 	global $conn;
@@ -283,10 +299,10 @@ function printEventPictures($event_id, $page = 1, $folder = "processed") {
 	//*******************
 	// Print empty folder message
 	//*******************
-	if($count==0) {
+	if($count==0 && $event_id != 0) {
 		echo '<div class="mainmessage">Nothing here yet!</div>';
 		echo '<div style="clear:both"></div>';
-		return;
+		//return;
 	}
 	
 	//*******************
@@ -315,6 +331,32 @@ function printEventPictures($event_id, $page = 1, $folder = "processed") {
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
+	}
+
+	if($event_id == 0)
+	{
+		$result = mysql_query("SELECT image_id FROM useruploads WHERE user_id = '$user_id'");
+
+		while (($row = mysql_fetch_array($result, MYSQL_ASSOC))) {		
+			$i++;
+			$timestamp = timestamp();
+			$image_link = $s3->getAuthenticatedURL($bucket,'uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);
+			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
+			$description = "No description";
+			$title = "Full Image";
+			echo '<div class="thumb_container">';
+			echo '<div class="thumb_div">';
+			//echo '<a   target="_new" class="thumb" href="'.$imgsrc.'">';
+			//echo '<div class="overlay_download"> Download </div>';
+			//echo '</a>';
+			echo '<div class="thumb_pic">';
+			echo '<a class="thumb" href="'.$image_link.'">';
+	        	echo '<img src="'.$thumb_link.'" title="'.$title.'" />';
+	        	echo '</a>';
+			echo '</div>';
+			echo '</div>';
+			echo '</div>';
+		}
 	}
 	
 	echo '<div style="clear:both"></div>';
