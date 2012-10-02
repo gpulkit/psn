@@ -1,0 +1,4 @@
+<?php
+require_once('../../config.php');
+
+mysql_query('SELECT face_id FROM faces WHERE image_id = ANY (SELECT image_id FROM useruploads WHERE user_id = '$user_id'");

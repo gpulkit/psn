@@ -372,3 +372,13 @@ h2 {
 	background-color: black;
 	z-index:1002;
 }
+
+.uploadify-queue
+{
+display:none;
+}
+
+.status
+{
+	width:200px;
+}
