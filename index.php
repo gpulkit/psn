@@ -182,23 +182,23 @@ Photo Sharing Network
 	<td colspan='2'><h2>New Users</h2></td>
 </tr>
 <tr>
-<td>email</td> <td> <input name="username" type="text" id="frm_username" value=''  class="username_return"/>  </td> <td class='e_u'></td>
+<td>E-mail</td> <td> <input name="username" type="text" id="frm_username" value=''  class="username_return"/>  </td> <td class='e_u'></td>
 </tr>
 <tr>
-	<td>pass</td> <td> <input name="password1" type="password" />  </td> <td class='e_p1'></td>
+	<td>Password</td> <td> <input name="password1" type="password" />  </td> <td class='e_p1'></td>
 </tr>
 <tr>
-	<td>confirm<br/> pass</td> <td><input name="password2" type="password" />   </td> <td class='e_p2'></td>
+	<td>Confirm<br/> Password</td> <td><input name="password2" type="password" />   </td> <td class='e_p2'></td>
 </tr>
 <tr>	
-	<td>cell</td> <td><input name="phone" type="text" />   </td> <td class='e_ph'></td>
+	<td>Cell</td> <td><input name="phone" type="text" />   </td> <td class='e_ph'></td>
 </tr>
 <tr style="<?php if(isset($campus_id)) echo 'display:none;'?>">
-	<td>univ</td>
+	<td>School</td>
 	<td>
 		<select name='univs' class="univs">
 			<?php
-				echo "<option value='0'>Select your University</option>";
+				echo "<option value='0'>Select your school</option>";
 				while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
 				{
 					$id = $row['campus_id'];
@@ -214,11 +214,11 @@ Photo Sharing Network
 	<td class='e_univs'></td>
 </tr>
 <tr>
-	<td>greek</td>
+	<td>Campus Affiliation</td>
 	<td>
 		<select name='orgs' class='orgs'>
 			<?php
-				echo "<option value='0'>Select your Greek society</option>";
+				echo "<option value='0'>Select your campus affiliation</option>";
 				while ($row = mysql_fetch_array($result2, MYSQL_ASSOC)) 
 				{
 					$id = $row['org_id'];
@@ -231,7 +231,7 @@ Photo Sharing Network
 	<td class='e_orgs'></td>
 </tr>
 <tr style="<?php if(isset($ec)) echo 'display:none;'?>">
-	<td>event<br/> code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td>
+	<td>Event Code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td>
 </tr>
 <tr>
 	<td></td>
@@ -251,7 +251,7 @@ Returning user? <a href='login.php'> <u>Login</u> </a>
 </div>
 
 <div class="homecontentfooter"></div>
-<span style="color:grey;font-size:11px;"><br/>Want PSN at your event? Please e-mail ryan (at) emorypartypictures.com</span>    
+<span style="color:grey;font-size:11px;"><br/>Interested in learning more about PSN?  Event coverage, beta tests, jobs, technology partnerships, questions?  Ryan (at) photosharingnetwork.com</span>    
 </div>
 
 <script type="text/javascript">
