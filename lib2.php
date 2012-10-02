@@ -173,7 +173,7 @@ function printUserUploads($user_id = 0) {
 	mysql_free_result($result);
 }
 
-function printEvents($email=0, $page = 1) {
+function printEvents($email=0, $user_id = 0, $page = 1) {
 	
 	global $conn;
 	global $s3;
@@ -181,8 +181,9 @@ function printEvents($email=0, $page = 1) {
 
 	$pictures_per_page = 48;
 
-	$result = mysql_query("SELECT event_id from users_events WHERE email = '$email'");
-	
+	#$result = mysql_query("SELECT event_id from users_events WHERE email = '$email'");
+	$result = mysql_query("SELECT event_id FROM events WHERE org_id = (SELECT org_id FROM users WHERE user_id = '$user_id') UNION SELECT event_id FROM users_events WHERE email = '$email'");
+
 	if($result==0) {
 		echo mysql_error($conn);
 	}
