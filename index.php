@@ -158,7 +158,7 @@ if($result == 0)
 
 
 <div class="header">
-Photo Sharing Network
+Photo Sharing Network <span>[Advanced Beta Release]</span> 
 </div>
 
 
