@@ -206,8 +206,17 @@ function printEvents($email=0, $user_id = 0, $page = 1) {
 		echo '<div style="clear:both"></div>';
 		return;
 	}*/
-	$timestamp = 500;
-	$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/NewGallery.JPG', $timestamp, false, false);
+
+		$result2 = mysql_query("SELECT image_id FROM useruploads WHERE user_id = '$user_id'");
+		$timestamp = 500;
+		if(mysql_num_rows($result) == 0)
+			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/NewGallery.JPG', $timestamp, false, false);
+		else
+		{
+			$row = mysql_fetch_array($result2, MYSQL_ASSOC);
+			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
+		}
+	
 	echo '<div style="clear:both"></div>';
 
 		echo '<div class="thumb_container">';
