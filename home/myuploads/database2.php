@@ -2,6 +2,8 @@
 	ini_set('memory_limit','128M');
 	require_once('../../lib2.php');
 	require_once('../../phpThumb/phpthumb.class.php');
+	$faces = 0;
+	$recognized = 0;
 
 	if(isset($_REQUEST['u']))
 	{
@@ -15,8 +17,6 @@
 		}
 		else
 		{
-
-
 			$image_id = mysql_insert_id();
 			$file_name = mysql_real_escape_string($_REQUEST['file']);
 			
@@ -41,7 +41,7 @@
 			}
 			else
 			{
-                                $tags = array();
+                $tags = array();
 				while($row = mysql_fetch_array($result,MYSQL_ASSOC))
 				{
 
@@ -69,10 +69,14 @@
 									continue;
 								if($tag->attributes->face->confidence < 80)
 									continue;
-                                                                if(!isset($tags[$tag->tid]))
-                                                                    $tags[$tag->tid] = 0;
-                                                                if($tags[$tag->tid] == 2)
-                                                                    continue;
+                                if(!isset($tags[$tag->tid]))
+                                {
+                            		$tags[$tag->tid] = 0;
+                            		$faces++;
+                            	}
+
+                                if($tags[$tag->tid] == 2)
+                                	continue;
 
 								$count++;
 								$fail = false;
@@ -82,7 +86,8 @@
 									$conf = $tag->uids[0]->confidence;
 									if ($conf >= 60){ 
 										$query_str = "INSERT INTO pictures (image_id, user_id, event) VALUES ('$image_id','$user_id',0)";
-							                        $tags[$tag->tid] = 2;
+							            $tags[$tag->tid] = 2;
+							            $recognized++;
 										
 										$result2 = mysql_query($query_str);
 										if($result2 == 0) {
@@ -101,7 +106,11 @@
 		                    	{
 		                    		crop($tag,$width,$height,$file_name,$count,$image_id);
 		                    	}
-							        $tags[$tag->tid] = 1;
+
+							    if($tags[$tag->tid] == 0)
+							    {
+							    	$tags[$tag->tid] = 1;
+							    }
 		                	}//end of for tag
 		          		}//end of for response
 		       		}//end of isset
@@ -111,6 +120,7 @@
        		unlink('./uploads/'.$file_name);
        		unlink('./uploads/t_'.$file_name);
 		}
+		echo $faces.','.$recognized;
 	}
 
 	function crop($tag,$width,$height,$file_name,$count,$image_id)

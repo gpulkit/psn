@@ -24,92 +24,91 @@ if(isset($_SESSION["fb_id"])) {
 <html xmlns="http://www.w3.org/1999/xhtml" >
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Photo Sharing Network</title>
-<link rel="stylesheet" type="text/css" href="./uploadify/uploadify.css" />
-<link rel="stylesheet" type="text/css" href="../../css/main.css??" />
-<link type='text/css' href='../../css/gallery.css' rel='stylesheet' media='screen' />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Photo Sharing Network</title>
+	<link rel="stylesheet" type="text/css" href="./uploadify/uploadify.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css??" />
+	<link type='text/css' href='../../css/gallery.css' rel='stylesheet' media='screen' />
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="./uploadify/jquery.uploadify.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="./uploadify/jquery.uploadify.min.js"></script>
 
-<!--<script type="text/javascript" src="/gallery/js/jquery-1.7.2.min.js" ></script>-->
-<script type='text/javascript' src='/../../js/jquery.simplemodal.js'></script>
-<script type='text/javascript' src='/../../js/gallery7.js'></script>
-<script type="text/javascript" src="/../../js/jquery-ui-1.8.19.custom.min.js" ></script>
+	<!--<script type="text/javascript" src="/gallery/js/jquery-1.7.2.min.js" ></script>-->
+	<script type='text/javascript' src='/../../js/jquery.simplemodal.js'></script>
+	<script type='text/javascript' src='/../../js/gallery7.js'></script>
+	<script type="text/javascript" src="/../../js/jquery-ui-1.8.19.custom.min.js" ></script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-34914677-1']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-34914677-1']);
+	_gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 
-</script>
+	</script>
 
-<script type="text/javascript">
-$(document).ready(function(){
+	<script type="text/javascript">
+	$(document).ready(function(){
 		parent.document.getElementById('pictureframe').src='<?php echo "soon.html";?>';
 		document.getElementById('light').style.display='block';
 		document.getElementById('fade').style.display='block';
-    });
-</script>
+	});
+	</script>
 
 </head>
 
 <body>
 
-<div id='light' class='white_content'>
-<iframe id='pictureframe' src="" width="700" height="400"> </iframe>
-</div>
-<div id='fade' class='black_overlay'>
-</div>
+	<div id='light' class='white_content'>
+		<iframe id='pictureframe' src="" width="700" height="400"> </iframe>
+	</div>
+	<div id='fade' class='black_overlay'>
+	</div>
 
-<div align="center">
+	<div align="center">
 
-<div class="header">
-Photo Sharing Network
-</div>
+		<div class="header">
+			Photo Sharing Network
+		</div>
 
-<div class="contentheader_wrapper"><div class="contentheader">
+		<div class="contentheader_wrapper"><div class="contentheader">
+			<div class="currenttab"><a href="../../home/myuploads" >My Uploads</a></div>
+			<div class="othertab"><a href="../../home">Photos of Me</a></div>
+			<div class="othertab"><a href="../../home/galleries">Extended Galleries</a></div>
+		</div></div>
 
-<div class="currenttab"><a href="../../home/myuploads" >My Uploads</a></div>
-<div class="othertab"><a href="../../home">Photos of Me</a></div>
-<div class="othertab"><a href="../../home/galleries">Extended Galleries</a></div>
-</div></div>
+		<div class="contentwrapper"> 
+			<div class="content">
 
-<div class="contentwrapper"> 
-<div class="content">
+				<div class="uploadbox" >
+					<h1>Upload multiple photos</h1>
+					<br/>
+					<table>
+						<form>
+							<tr><div id="queue1"></div></tr>
+							<tr><input id="file_upload" name="file_upload" type="file" multiple="true"></tr>
+						</form>
+					</table>
+				</div>
+				<div class="message"></div>
+				<div style="height:200px;" class="pictures">
+					<?php printUserUploads($user_id); ?>
+				</div>
 
-<div class="uploadbox" >
-<h1>Upload multiple photos</h1>
-<br/>
-<table>
-<form>
-		<tr><div id="queue1"></div></tr>
-		<tr><input id="file_upload" name="file_upload" type="file" multiple="true"></tr>
-</form>
-</table>
-</div>
-<div class="message"></div>
-<div style="height:200px;" class="pictures">
-<?php printUserUploads($user_id); ?>
-</div>
+				<div class="clear"></div> 
 
-<div class="clear"></div> 
+			</div> 
+		</div>
 
-</div> 
-</div>
+		<div class="contentfooter"></div> 
+		<span style="color:grey;font-size:11px;"><br/>Interested in learning more about PSN?  Event coverage, beta tests, jobs, technology partnerships, questions?  Ryan (at) photosharingnetwork.com</span>   
 
-<div class="contentfooter"></div> 
-<span style="color:grey;font-size:11px;"><br/>Interested in learning more about PSN?  Event coverage, beta tests, jobs, technology partnerships, questions?  Ryan (at) photosharingnetwork.com</span>   
-
-<script type="text/javascript">
+		<script type="text/javascript">
 
 		var images = new Array()
 		function preload() {
@@ -120,11 +119,11 @@ Photo Sharing Network
 		}
 		preload(
 			"/img/site/button-pressed-small.gif"
-		)
+			)
 		
-</script>
+		</script>
 
-	<script type="text/javascript">
+		<script type="text/javascript">
 		
 		<?php $timestamp = time();?>
 		$(function() {
@@ -139,19 +138,19 @@ Photo Sharing Network
 				'uploader' : './uploadify/uploadify.php',
 				'onUploadSuccess' : function(file, data, response) {
 				            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-				           	$.ajax({
-				            		type: 'GET',
-				            		url: './database.php?u='+<?php echo $user_id ?>+'&file='+file.name,
-				            		success: function(data1){
+				            $.ajax({
+				            	type: 'GET',
+				            	url: './database.php?u='+<?php echo $user_id ?>+'&file='+file.name,
+				            	success: function(data1){
 				            			//alert(data1);
-				       					$('div.pictures').html(data1);
+				            			$('div.pictures').html(data1);
 				            		}
 
 				            	})
-				       }
-			});
+				        }
+				    });
 		});
-	</script>
+		</script>
 
-</div>
+	</div>
 </body>

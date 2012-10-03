@@ -44,6 +44,7 @@ if(isset($_REQUEST['u']))
 			];
 
 			$( "input").live( "focus", function(){
+				$(this).val("");
 			      $(this).autocomplete({
 						source: availableTags
 					}).focus();
@@ -61,7 +62,7 @@ $(document).ready(function(){
 		     			//alert(data1);
 		     		}
 		     	})
-		     	$(this).parents("tr").remove();
+		     	$(this).parents("tr").hide("slow");
 			}
 		  });
 		});
@@ -86,7 +87,7 @@ $(document).ready(function(){
 		$face_id = $row['face_id'];
 		$timestamp = 500;
 		$url = $s3->getAuthenticatedURL($bucket,'faces/'.$face_id.'.jpg', $timestamp,false, false);	
-		echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" color="grey" value=""/></td></tr>';
+		echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" style="font-color:grey; width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
 	}
 	echo '</table>';
 }
