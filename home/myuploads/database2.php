@@ -41,6 +41,7 @@
 			}
 			else
 			{
+                                $tags = array();
 				while($row = mysql_fetch_array($result,MYSQL_ASSOC))
 				{
 
@@ -57,18 +58,22 @@
 								continue;
 
 							$width = $photo->width; // full image width
-		                   	$height = $photo->height; // Full image height
+		                   	                $height = $photo->height; // Full image height
 							$count=0;
+
 							foreach ($photo->tags as $tag)
 							{
-								echo $tag->tid.'<br/>';
 								//echo $tag->width." ".$tag->height;
 
 								if(($tag->width < 6.0) || ($tag->height < 6.0))
 									continue;
 								if($tag->attributes->face->confidence < 80)
 									continue;
-								
+                                                                if(!isset($tags[$tag->tid]))
+                                                                    $tags[$tag->tid] = 0;
+                                                                if($tags[$tag->tid] == 2)
+                                                                    continue;
+
 								$count++;
 								$fail = false;
 								if (!empty($tag->uids))
@@ -77,6 +82,7 @@
 									$conf = $tag->uids[0]->confidence;
 									if ($conf >= 60){ 
 										$query_str = "INSERT INTO pictures (image_id, user_id, event) VALUES ('$image_id','$user_id',0)";
+							                        $tags[$tag->tid] = 2;
 										
 										$result2 = mysql_query($query_str);
 										if($result2 == 0) {
@@ -88,14 +94,14 @@
 				           			{
 				           				$fail = true;
 				           			}//end of if threshold  
-				           			if($fail)
-				           				
+				           			if($fail && $tags[$tag->tid] !=1 )
 				           				crop($tag,$width,$height,$file_name,$count,$image_id);
 		                    	}//end of if empty
-		                    	else
+		                    	else if($tags[$tag->tid] != 1)
 		                    	{
 		                    		crop($tag,$width,$height,$file_name,$count,$image_id);
 		                    	}
+							        $tags[$tag->tid] = 1;
 		                	}//end of for tag
 		          		}//end of for response
 		       		}//end of isset
@@ -128,10 +134,10 @@
 		$dest = imagecreatetruecolor($X_face, $Y_face);
 		
 		imagecopy($dest,$src,0,0, $X_pos, $Y_pos, $X_face, $Y_face);
-		
+	        	
 		//header('Content-Type: image/jpeg');
 		$path = './uploads/'.$file_name.'_'.$count.'.jpg';
-		imagegif($dest,$path);
+		imagejpeg($dest,$path,20);
 		
 		$query = "INSERT INTO faces (image_id) VALUES ('$image_id')";
 		$result = mysql_query($query);
