@@ -212,10 +212,11 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	color : red;
 }
 .homecontent {
-	padding-left:275px;
-	padding-top:0px;
-	width:960px;
-	/*background-color:#fffff0;*/
+	padding-left:75px;
+	padding-top:20px;
+	width:100%;
+	min-height:650px;
+	/*background-color:#ff0000;*/
 }
 
 .content, .setupcontent   {
@@ -235,21 +236,34 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	float:center;	
 	text-align:center;
 }
+.welcomeupload {
+	padding-left:0px;
+	float:center;	
+}
+
+.imagebox {
+	/*background-image:url(../img/site/home.png);*/
+	float:left;	
+	width:550px;
+	height:500px;
+	/*background-color:#000000;*/
+}
 
 .registerbox {
-	float:center;	
-	width:600px;
-	height:300px;
+	float:left;	
+	width:550px;
+	height:500px;
 	text-align:left;
-	/*background-color:#000000;*/
+	/*background-color:#0000ff;*/
 }
 
 .loginbox {
 	float:left;
 	width:400px;
-	margin-left:60px;
+	margin-left:420px;
 	height:300px;
 	text-align:left;
+	/*background-color:#ff00ff;*/
 }
 
 .setupbox {
@@ -259,11 +273,20 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	text-align:left;
 }
 
+.optionsbox {
+	margin-left: 100px;
+	float:left;	
+	width:450px;
+	height:490px;
+	text-align:center;
+	border: 3px black solid;
+}
+
 .uploadbox {
 	padding-left: 48px;
 	padding-top: 18px;
 	float:left;	
-	width:500px;
+	width:400px;
 	min-height:300px;
 	text-align:left;
 	border: 3px white solid;
@@ -274,7 +297,7 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	padding-left: 10px;
 	padding-top: 18px;
 	float:right;	
-	width:300px;
+	width:450px;
 	min-height:300px;
 	text-align:left;
 	border: 3px white solid;

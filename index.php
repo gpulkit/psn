@@ -168,81 +168,86 @@ function validate_form(i)
 	</div>
 
 	<div class="homecontentwrapper"> 
-		<div class = "welcome">
-			<br/>Welcome to Photo Sharing Network<br/><br/>We provide an easy and more private way for you to share photos<br/>
-			(without over-sharing) <br/><br/>
-		</div>
-		<div class="homecontent"> 
+		<div class="homecontent" align="left"> 
+			<div class="imagebox" align="center">
+				<img src='./img/site/home.png' width='400px' height='530px' style="border: 3px black solid;"/>
+			</div>
 			<div class="registerbox">
-				<form id="registerform" method="post" action="./actions/register.php">
-					<table>
-						<tr>
-							<td colspan='2'><h2>New Users</h2></td>
-						</tr>
-						<tr>
-							<td>E-mail</td> <td> <input name="username" type="text" id="frm_username" value=''  class="username_return"/>  </td> <td class='e_u'></td>
-						</tr>
-						<tr>
-							<td>Password</td> <td> <input name="password1" type="password" />  </td> <td class='e_p1'></td>
-						</tr>
-						<tr>
-							<td>Confirm<br/> Password</td> <td><input name="password2" type="password" />   </td> <td class='e_p2'></td>
-						</tr>
-						<tr>	
-							<td>Cell</td> <td><input name="phone" type="text" />   </td> <td class='e_ph'></td>
-						</tr>
-						<tr style="<?php if(isset($campus_id)) echo 'display:none;'?>">
-							<td>School</td>
-							<td>
-								<select name='univs' class="univs">
-									<?php
-									echo "<option value='0'>Select your school</option>";
-									while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
-									{
-										$id = $row['campus_id'];
-										$name = $row['campus_name'];
-										if(isset($campus_id) && $campus_id == $id)
-											echo "<option value='$id' selected='selected'>$name</option>";
-										else
-											echo "<option value='$id' >$name</option>";
-									}
-									?>
-								</select>
-							</td>
-							<td class='e_univs'></td>
-						</tr>
-						<tr>
-							<td>Campus<br/> Affiliation</td>
-							<td>
-								<select name='orgs' class='orgs'>
-									<?php
-									echo "<option value='0'>Select your campus affiliation</option>";
-									while ($row = mysql_fetch_array($result2, MYSQL_ASSOC)) 
-									{
-										$id = $row['org_id'];
-										$name = $row['org_name'];
-										echo "<option value='$id'>$name</option>";
-									}
-									?>
-								</select>
-							</td>
-							<td class='e_orgs'></td>
-						</tr>
-						<tr style="<?php /*if(isset($ec))*/ echo 'display:none;'?>">
-							<td>Event Code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td><td>(Optional)</td>
-						</tr>
-						<tr>
-							<td></td>
-							<input style="display:none" type="submit" name='submit1'/>
-							<td>
-								<a href="javascript:void(0);" onclick="validate_form(0)"> 
-									<div class="button">Register </div>
-								</a>
-							</td>
-						</tr>
-					</table>
-				</form>
-				Returning user? <a href='login.php'> <u>Login</u> </a>
+				<div class = "welcome">
+						<br/>Welcome to Photo Sharing Network<br/><br/>We provide an easy and more private way for you to share photos<br/>
+						(without over-sharing) <br/><br/>
+				</div>
+				<div align="left" style="padding-left:120px; width:450px;">
+					<form id="registerform" method="post" action="./actions/register.php">
+						<table>
+							<tr>
+								<td colspan='2'><h2>New Users</h2></td>
+							</tr>
+							<tr>
+								<td>E-mail</td> <td> <input name="username" type="text" id="frm_username" value=''  class="username_return"/>  </td> <td class='e_u'></td>
+							</tr>
+							<tr>
+								<td>Password</td> <td> <input name="password1" type="password" />  </td> <td class='e_p1'></td>
+							</tr>
+							<tr>
+								<td>Confirm<br/> Password</td> <td><input name="password2" type="password" />   </td> <td class='e_p2'></td>
+							</tr>
+							<tr>	
+								<td>Cell</td> <td><input name="phone" type="text" />   </td> <td class='e_ph'></td>
+							</tr>
+							<tr style="<?php if(isset($campus_id)) echo 'display:none;'?>">
+								<td>School</td>
+								<td>
+									<select name='univs' class="univs">
+										<?php
+										echo "<option value='0'>Select your school</option>";
+										while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
+										{
+											$id = $row['campus_id'];
+											$name = $row['campus_name'];
+											if(isset($campus_id) && $campus_id == $id)
+												echo "<option value='$id' selected='selected'>$name</option>";
+											else
+												echo "<option value='$id' >$name</option>";
+										}
+										?>
+									</select>
+								</td>
+								<td class='e_univs'></td>
+							</tr>
+							<tr>
+								<td>Campus<br/> Affiliation</td>
+								<td>
+									<select name='orgs' class='orgs'>
+										<?php
+										echo "<option value='0'>Select your campus affiliation</option>";
+										while ($row = mysql_fetch_array($result2, MYSQL_ASSOC)) 
+										{
+											$id = $row['org_id'];
+											$name = $row['org_name'];
+											echo "<option value='$id'>$name</option>";
+										}
+										?>
+									</select>
+								</td>
+								<td class='e_orgs'></td>
+							</tr>
+							<tr style="<?php /*if(isset($ec))*/ echo 'display:none;'?>">
+								<td>Event Code</td> <td><input name="ecode" type="text" value='<?php if(isset($ec)) echo $ec; ?>'/></td><td>(Optional)</td>
+							</tr>
+							<tr>
+								<td></td>
+								<input style="display:none" type="submit" name='submit1'/>
+								<td>
+									<a href="javascript:void(0);" onclick="validate_form(0)"> 
+										<div class="button">Register </div>
+									</a>
+								</td>
+							</tr>
+							<tr><td colspan='3'>Returning user? <a href='login.php'> <u>Login</u> </a></td></tr>
+						</table>
+					</form>
+				</div>
 			</div>
 			<div class="clear"></div>         
 		</div> 

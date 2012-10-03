@@ -110,7 +110,7 @@ Photo Sharing Network
 	(without over-sharing) <br/><br/>
     </div>
 <div class="homecontent"> 
-<div class="registerbox">
+<div class="loginbox">
 <form id="loginform" method="post" action="./actions/login2.php">
 <table>
 <tr>

@@ -28,7 +28,7 @@ $client->setRedirectUri($redirecturi);
 $client->setDeveloperKey($developerkey);
 $client->setAccessType('offline');
 $auth = $client->createAuthUrl();
-
+$result ='';
 if(!isset($token))
 {
 	$token_result = mysql_query("SELECT gat FROM users WHERE user_id = '$user_id'");
@@ -86,30 +86,33 @@ if(!isset($token))
 	<!-- jquery-ui  <script type="text/javascript" src="../../jquery-ui/js/jquery-1.8.0.min.js"></script> -->
 
 	<?php 
-	if (isset($token)) {
+	
 		echo '
 		<script>
 		$(function() {
 			var availableTags = [';
-			foreach ($result as $title) {
-				echo '"'.$title->attributes()->address.'",';
-			}
+			if(isset($token))
+				foreach ($result as $title) {
+					echo '"'.$title->attributes()->address.'",';
+				}
+			
 			echo '
 			];
 
 			$( "input").live( "focus", function(){
-				if($(this).val() == "Enter e-mail address here to share!")
+				//if($(this).val() == "Enter e-mail address here to share!")
 					$(this).val("");
 				$(this).autocomplete({
 					source: availableTags,
 					select: function(event, ui) { 
-    console.log("User selected: " + ui.item.value); 
-   } 
+    					console.log("User selected: " + ui.item.value); 
+   					}	 
 				});
-return false;
-});
-});
-$(document).ready(function(){
+				return false;
+			});
+		});
+		
+		$(document).ready(function(){
 		  $("input").live("keyup",function(e){
 			if(e.keyCode == 13) {
 				//alert("dfs");
@@ -128,8 +131,6 @@ $(document).ready(function(){
 		  });
 		});
 		</script>';
-}
-
 ?>
 <script type="text/javascript">
 var _gaq = _gaq || [];
@@ -174,7 +175,7 @@ $(document).ready(function(){
 		<div class="contentwrapper">
 			<div class="content">
 				<!--<h1><u>Upload</u> and <u>Easily Share</u> photos</h1>-->
-				<div class="welcome">Placeholder for explanation<br/><br/></div>
+				<div class="welcomeupload"><img src="../../img/site/upload.png" width="1000px" height="300px"/><br/><br/></div>
 				<div class="uploadbox">
 					<div class="status"></div>
 					<br/>
@@ -189,13 +190,13 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<div class="facebox">
-					<div class = "link" style="display: <?php if(isset($token)) echo 'none'; else echo 'block';?>"> 
-						<!--<?php echo '<a href="'.$auth.'" ><img src="example.jpg"/></a>';?>-->
-						<?php echo '<a href="'.$auth.'" >Enable auto-fill</a>';?>
+					<div class = "link" align="center" style="display: <?php if(isset($token)) echo 'none'; else echo 'block';?>"> 
+						<?php echo '<a href="'.$auth.'" ><img src="example.jpg"/></a>';?>
+						<!--<?php echo '<a href="'.$auth.'" >Enable auto-fill</a>';?>-->
 					</div>
 					<br/>
 					<!--<iframe class="faces" src='faces.php?u=<?php echo $user_id ?>' width="300" height="400"> </iframe>-->
-					<div class="faces">
+					<div class="faces" align="center">
 
 						<?php
 						
@@ -203,19 +204,19 @@ $(document).ready(function(){
 							if($result == 0)
 								echo mysql_error($conn);
 						        $count = mysql_num_rows($result);
-						        echo '<span class="count">'.$count.'</span> outstanding faces<br/><br/>';
+						        echo '<span class="count">'.$count.'</span> outstanding faces to identify (photos to share)<br/><br/>';
 
 						        if(mysql_num_rows($result) == 0)
 						        {
 						            return;
 						        }
-							echo '<table>';
+							echo '<table style="border-spacing:2em;">';
 							while($row = mysql_fetch_array($result,MYSQL_ASSOC))
 							{
 								$face_id = $row['face_id'];
 								$timestamp = 500;
 								$url = $s3->getAuthenticatedURL($bucket,'faces/'.$face_id.'.jpg', $timestamp,false, false);	
-								echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" style="font-color:grey; width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
+								echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px" style="border: 3px white solid;"></td><td><input id="'.$face_id.'" type="text" style="color:gray;width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
 							}
 							echo '</table>';
 							
