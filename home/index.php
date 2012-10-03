@@ -76,6 +76,7 @@ function toggle(n)
 		{f:'user',
 		user_id:'<?php echo $user_id ?>',
 		folder: n});
+}
 </script>
 
 <script type="text/javascript">

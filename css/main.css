@@ -32,11 +32,11 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 .thumb_container {
 	xheight: 300px;
 	width:  300px;
-	vertical-align:top;
+	vertical-align:bottom;
 	float:left;
 	xborder: solid #DDD 1px;
 	margin: 0 8px 8px 0px;
-    padding: 5px;
+        padding: 5px;
 }
 
 .overlay_allpics {
@@ -65,6 +65,15 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	position:relative;
 	top:0px;
 	left:0px;
+        float:inherit;
+}
+
+.thumb_pic_user {
+        float:inherit;
+}
+
+.thumb {
+        float:inherit;
 }
 
 
@@ -136,6 +145,14 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	font-size:40px;
 	margin-bottom:20px;
 	font-weight:600;
+}
+
+.header span {	margin-top:15px;	
+	width:900px;
+	text-align:left;
+	font-size:20px;
+	margin-bottom:20px;
+	font-weight:50;
 }
 
 .homecontentheader, .contentheader, .setupcontentheader {
@@ -394,5 +411,5 @@ display:none;
 
 .status
 {
-	width:200px;
+    width:200px;
 }
