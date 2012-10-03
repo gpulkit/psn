@@ -30,10 +30,13 @@ if(isset($_REQUEST['u']))
 	}
 
 	if (isset($token)) {
-	  	echo '
-	  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		/*
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	  	<link type="text/css" href="../../jquery-ui-2/css/ui-lightness/jquery-ui-1.8.24.custom.css" rel="Stylesheet" />	
-		<script type="text/javascript" src="../../jquery-ui-2/js/jquery-ui-1.8.24.custom.min.js"></script>
+		<script type="text/javascript" src="../../jquery-ui-2/js/jquery-ui-1.8.24.custom.min.js"></script>*/
+	  	echo '
+	  	
+	  	
 		<script>
 		$(function() {
 			var availableTags = [';

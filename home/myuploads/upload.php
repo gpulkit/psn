@@ -38,7 +38,7 @@ if(!isset($token))
 	{
 		$token = $row['gat'];
 		$client->refreshToken($token);  
-		$req = new apiHttpRequest("https://www.google.com/m8/feeds/contacts/default/full?max-results=5000");
+		$req = new apiHttpRequest("https://www.google.com/m8/feeds/contacts/default/full?max-results=30");
 		$val = $client->getIo()->authenticatedRequest($req);
 		$xml =  new SimpleXMLElement($val->getResponseBody());
 		$xml->registerXPathNamespace('gd', 'http://schemas.google.com/g/2005');
@@ -80,8 +80,6 @@ if(!isset($token))
 	<!--<script type="text/javascript" src="../../js/jquery-1.7.2.min.js" ></script>-->
 	<script type='text/javascript' src='../../js/jquery.simplemodal.js'></script>
 	<script type='text/javascript' src='../../js/gallery7.js'></script>
-	<script type="text/javascript" src="../../js/jquery-ui-1.8.19.custom.min.js" ></script>
-
 
 	<link type="text/css" href="../../jquery-ui-2/css/ui-lightness/jquery-ui-1.8.24.custom.css" rel="Stylesheet" />	
 	<script type="text/javascript" src="../../jquery-ui-2/js/jquery-ui-1.8.24.custom.min.js"></script>
@@ -100,10 +98,14 @@ if(!isset($token))
 			];
 
 			$( "input").live( "focus", function(){
-				$(this).val("");
+				if($(this).val() == "Enter e-mail address here to share!")
+					$(this).val("");
 				$(this).autocomplete({
-					source: availableTags
-				}).focus();
+					source: availableTags,
+					select: function(event, ui) { 
+    console.log("User selected: " + ui.item.value); 
+   } 
+				});
 return false;
 });
 });
@@ -115,10 +117,13 @@ $(document).ready(function(){
 		     		type: "GET",
 		     		url: "./face_invitation.php?u='.$user_id.'&v="+$(this).val()+"&f="+$(this).attr("id"),
 		     		success: function(data1){
-		     			alert(data1);
+		     			//alert(data1);
 		     		}
 		     	})
-		     	$(this).parents("tr").hide("slow");
+				$(this).val("Privately Shared");
+				$(this).attr("disabled", true);
+		     	$(this).parents("tr").hide(2000);
+		     	$("span.count").html(parseInt($("span.count").text())-1); 
 			}
 		  });
 		});
@@ -191,12 +196,14 @@ $(document).ready(function(){
 					<br/>
 					<!--<iframe class="faces" src='faces.php?u=<?php echo $user_id ?>' width="300" height="400"> </iframe>-->
 					<div class="faces">
+
 						<?php
+						
 							$result = mysql_query("SELECT face_id FROM faces WHERE image_id = ANY (SELECT image_id FROM useruploads WHERE user_id = '$user_id') AND email IS NULL ORDER BY face_id DESC");
 							if($result == 0)
 								echo mysql_error($conn);
 						        $count = mysql_num_rows($result);
-						        echo $count.' outstanding faces<br/><br/>';
+						        echo '<span class="count">'.$count.'</span> outstanding faces<br/><br/>';
 
 						        if(mysql_num_rows($result) == 0)
 						        {
@@ -211,6 +218,7 @@ $(document).ready(function(){
 								echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" style="font-color:grey; width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
 							}
 							echo '</table>';
+							
 							?>
 					</div>
 				</div>
@@ -253,7 +261,7 @@ $(document).ready(function(){
 				'onDialogClose'  : function(queueData) {
 					if(queueData.filesQueued != 0)
 					{
-						$('#file_upload').uploadify('disable', true);
+						//$('#file_upload').uploadify('disable', true);
 				            //$('div.moreuploads').show();
 				            count = queueData.filesQueued;
 				            current = 0;
@@ -289,28 +297,35 @@ $(document).ready(function(){
 				       						$("div.status_"+folders+"_num").html('Uploading '+current+'/'+count + '....')
 				       						if(current == count)
 				       						{
-				       	 						$("div.status_"+folders).hide('slow')
+				       	 						$("div.status_"+folders).hide(3000)
 				       							$( "div.status_"+folders+'_faces').html('Uploaded: '+current+'/'+count);
 				       							$( "div.status_"+folders+'_num').html('Faces Recognized: '+recognized+'/'+faces);
 				       							$('#file_upload').uploadify('disable', false);
-			       							    $.ajax({
-											     	async: false,
-											     	type: 'GET',
-											     	url: './faces.php?u='+<?php echo $user_id ?>,
-											     	success: function(data1){
-															//$('div.faces').html(data1);
-													}
-												})
+			       								       							    $.ajax({
+			       																     	async: false,
+			       																     	type: 'GET',
+			       																     	url: './faces.php?u='+<?php echo $user_id ?>,
+			       																     	success: function(data1){
+			       																				$('div.faces').html(data1);
+			       																		}
+			       																	})
 				       						}
 				       					});
 				       				}
 
 				       			})
+     
 
 },
 'onQueueComplete' : function(queueData) {
 
-}
+},
+    'onSelectError' : function() {
+            alert('The file ' + file.name + ' returned an error and was not added to the queue.');
+        },
+        'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
+        }
 
 });
 });
