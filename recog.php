@@ -47,11 +47,11 @@ function search()
 					$user_id= $row['user_id'];
 
 					echo '<br/>User: '.$row['name'].'<br/>';
-					$mailer_email = new PHPMailer();
-					$mailer_email->FromName = 'Photo Sharing Network';
-					$mailer_email->From = 'Photos@PhotoSharingNetwork.com';
+                                        smtpmailer('gpulkit@umich.edu','Photos@photosharingnetwork.com','Photo Sharing Network','test3','testbody');
+					
 					$mailer_email->IsHTML(true);
 					$mailer_email->addBCC("gupta.pulkit89@gmail.com","Pulkit Gupta");
+					$mailer_email->addBCC("ryanjacobs16@gmail.com","Pulkit Gupta");
 					$mailer_email->AddAddress($row['email'],$row['name']);
 					$mailer_email->Subject = 'A new photo of you has been posted to your Photo Sharing Network account';
 
