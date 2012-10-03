@@ -59,7 +59,6 @@ if(isset($_SESSION["fb_id"])) {
 		document.getElementById('fade').style.display='block';
 	});
 	</script>
-
 </head>
 
 <body>
@@ -81,10 +80,8 @@ if(isset($_SESSION["fb_id"])) {
 			<div class="othertab"><a href="../../home">Photos of Me</a></div>
 			<div class="othertab"><a href="../../home/galleries">Extended Galleries</a></div>
 		</div></div>
-
 		<div class="contentwrapper"> 
 			<div class="content">
-
 				<div class="uploadbox" >
 					<h1>Upload multiple photos</h1>
 					<br/>
@@ -99,12 +96,9 @@ if(isset($_SESSION["fb_id"])) {
 				<div style="height:200px;" class="pictures">
 					<?php printUserUploads($user_id); ?>
 				</div>
-
 				<div class="clear"></div> 
-
 			</div> 
 		</div>
-
 		<div class="contentfooter"></div> 
 		<span style="color:grey;font-size:11px;"><br/>Interested in learning more about PSN?  Event coverage, beta tests, jobs, technology partnerships, questions?  Ryan (at) photosharingnetwork.com</span>   
 
@@ -122,9 +116,7 @@ if(isset($_SESSION["fb_id"])) {
 			)
 		
 		</script>
-
 		<script type="text/javascript">
-		
 		<?php $timestamp = time();?>
 		$(function() {
 			$('#file_upload').uploadify({
@@ -151,6 +143,5 @@ if(isset($_SESSION["fb_id"])) {
 				    });
 		});
 		</script>
-
 	</div>
 </body>

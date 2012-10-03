@@ -41,10 +41,9 @@
 			}
 			else
 			{
-                $tags = array();
+                                $tags = array();
 				while($row = mysql_fetch_array($result,MYSQL_ASSOC))
 				{
-
 					$fb_id = $row['fb_id'];
 					if($fb_id == '')
 						continue;
@@ -88,7 +87,6 @@
 										$query_str = "INSERT INTO pictures (image_id, user_id, event) VALUES ('$image_id','$user_id',0)";
 							            $tags[$tag->tid] = 2;
 							            $recognized++;
-										
 										$result2 = mysql_query($query_str);
 										if($result2 == 0) {
 					
@@ -111,6 +109,7 @@
 							    {
 							    	$tags[$tag->tid] = 1;
 							    }
+
 		                	}//end of for tag
 		          		}//end of for response
 		       		}//end of isset

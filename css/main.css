@@ -260,19 +260,25 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 }
 
 .uploadbox {
+	padding-left: 48px;
+	padding-top: 18px;
 	float:left;	
-	width:300px;
-	min-height:600px;
+	width:500px;
+	min-height:300px;
 	text-align:left;
-	/*background-color:#000000;*/
+	border: 3px white solid;
+	background-color:#000000;
 }
 
 .facebox {
+	padding-left: 10px;
+	padding-top: 18px;
 	float:right;	
 	width:300px;
 	min-height:300px;
 	text-align:left;
-	/*background-color:#0000FF;*/
+	border: 3px white solid;
+	background-color:#000000;
 }
 
 h1 {
@@ -426,3 +432,4 @@ h2 {
 {
 	display:none;
 }
+

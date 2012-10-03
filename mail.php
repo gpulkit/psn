@@ -1,28 +1,37 @@
 <?php
-require_once('./twilio-php/Services/Twilio.php');
-$AccountSid = "ACb4ad35d8c538f65ceabcb8253c704909";
-$AuthToken = "a763bf40d023bfed087d86a8ca3fb212";
-// Instantiate a new Twilio Rest Client
-$client = new Services_Twilio($AccountSid, $AuthToken);
-/* Your Twilio Number or Outgoing Caller ID */
+require_once 'config.php';
+require_once './src/class.phpmailer.php';
+$error ='';
 
-                  $people = array(
-                          "7347470243" => "Vasu",
-                                              );
+function smtpmailer($to, $from, $from_name, $subject, $body) { 
+    global $error;
+    global $mailpass;
+    global $mailuser;
+    $mail = new PHPMailer();  // create a new object
+    $mail->IsHTML(true);
+    $mail->IsSMTP(); // enable SMTP
+    $mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+    $mail->SMTPAuth = true;  // authentication enabled
+    $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 465; 
+    $mail->Username = $mailuser;
+    $mail->Password = $mailpass;         
+    $mail->SetFrom($from,$from_name);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+    $mail->AddAddress($to);
+    $mail->addBCC("gupta.pulkit89@gmail.com","Pulkit Gupta");
+    if(!$mail->Send()) 
+    {
+        $error = 'Mail error: '.$mail->ErrorInfo;
+        return false;
+    } else {
+        $error = 'Message sent!';
+        return true;
+    }
+}
 
-
-
-              
-$from = '7342742961';
-//$to ='8476444551';
-//$to ='7347470243';
-              
-        	                                                                    $body ="You've got a new photo!\nwww.photosharingnetwork.com/d.php?f=410\nClick on the link above to view.";
-  //                                   $client->account->sms_messages->create($from, $to, $body);
-            /*
-            foreach ($people as $to => $name) {
-                     // Send a new outgoing SMS 
-                             $body = "Bad news $name, the server is down and it needs your help";
-                                     $client->account->sms_messages->create($from, $to, $body);
-                                             echo "Sent message to $name";
-                                                 }*/
+//echo smtpmailer('gpulkit@umich.edu','Photos@photosharingnetwork.com','Photo Sharing Network','test3','testbody');
+//echo $error;
+?>

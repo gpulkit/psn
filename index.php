@@ -149,7 +149,6 @@ function validate_form(i)
 </head>
 
 <body>
-
 	<?php if( $detect->isMobile() ) : ?>
 	<div align="left">
 	<?php else : ?>

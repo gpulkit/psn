@@ -51,8 +51,6 @@ if(!isset($token))
 		$client->setAccessToken($token);
 		$authObj = json_decode($token);
 		$refreshToken = $authObj->refresh_token;
-	  //echo $refreshToken;
-	  //echo $token;
 		$error = mysql_query("UPDATE users SET gat = '$refreshToken' WHERE user_id = '$user_id'");
 		if($error == 0)
 			mysql_error($conn);
@@ -102,13 +100,29 @@ if(!isset($token))
 			];
 
 			$( "input").live( "focus", function(){
+				$(this).val("");
 				$(this).autocomplete({
 					source: availableTags
 				}).focus();
 return false;
 });
 });
-</script>';
+$(document).ready(function(){
+		  $("input").live("keyup",function(e){
+			if(e.keyCode == 13) {
+				//alert("dfs");
+		    	$.ajax({
+		     		type: "GET",
+		     		url: "./face_invitation.php?u='.$user_id.'&v="+$(this).val()+"&f="+$(this).attr("id"),
+		     		success: function(data1){
+		     			//alert(data1);
+		     		}
+		     	})
+		     	$(this).parents("tr").hide("slow");
+			}
+		  });
+		});
+		</script>';
 }
 
 ?>
@@ -125,21 +139,18 @@ _gaq.push(['_trackPageview']);
 </script>
 
 <script type="text/javascript">
+/*
 $(document).ready(function(){
-	$("input").live('keyup',function(e){
-		if(e.keyCode == 13) {
-		//alert('dfs');
-		$.ajax({
-			type: 'GET',
-			url: './face_invitation.php?u='+<?php echo $user_id ?>+'&v='+$(this).val()+'&f='+$(this).attr('id'),
-			success: function(data1){
-     			//alert(data1);
-     		}
-     	})
-		$(this).parents('tr').remove();
-	}
+	    $.ajax({
+	     	async: false,
+	     	type: 'GET',
+	     	url: './faces.php?u='+<?php echo $user_id ?>,
+	     	success: function(data1){
+					$('div.faces').append(data1);
+			}
+		})
 });
-});
+*/
 </script>
 </head>
 
@@ -173,11 +184,35 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<div class="facebox">
-					<div class = "link" style="margin-left:40px; display: <?php if(isset($token)) echo 'block'; else echo 'block';?>"> 
-						<?php echo '<a href="'.$auth.'" ><img src="example.jpg"/></a>';?>
+					<div class = "link" style="display: <?php if(isset($token)) echo 'block'; else echo 'block';?>"> 
+						<!--<?php echo '<a href="'.$auth.'" ><img src="example.jpg"/></a>';?>-->
+						<?php echo '<a href="'.$auth.'" >Enable auto-fill</a>';?>
 					</div>
 					<br/>
-					<iframe class="faces" src='faces.php?u=<?php echo $user_id ?>' width="300" height="400"> </iframe>
+					<!--<iframe class="faces" src='faces.php?u=<?php echo $user_id ?>' width="300" height="400"> </iframe>-->
+					<div class="faces">
+						<?php
+							$result = mysql_query("SELECT face_id FROM faces WHERE image_id = ANY (SELECT image_id FROM useruploads WHERE user_id = '$user_id') AND email IS NULL ORDER BY face_id DESC");
+							if($result == 0)
+								echo mysql_error($conn);
+						        $count = mysql_num_rows($result);
+						        echo $count.' outstanding faces<br/><br/>';
+
+						        if(mysql_num_rows($result) == 0)
+						        {
+						            return;
+						        }
+							echo '<table>';
+							while($row = mysql_fetch_array($result,MYSQL_ASSOC))
+							{
+								$face_id = $row['face_id'];
+								$timestamp = 500;
+								$url = $s3->getAuthenticatedURL($bucket,'faces/'.$face_id.'.jpg', $timestamp,false, false);	
+								echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" style="font-color:grey; width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
+							}
+							echo '</table>';
+							?>
+					</div>
 				</div>
 			</div>
 			<div class="clear"></div> 
@@ -247,20 +282,27 @@ $(document).ready(function(){
 				            		recognized += parseInt(arr[1],10);
 				            		current = current +1;
 				            			//alert(data1);
-				       					//$('div.faces').append(data1);
-				       					$('iframe.faces').attr("src", $('iframe.faces').attr("src"));
 				       					$(function() {
 				       						$("div.status_"+folders).progressbar(
 				       							"value",(current*100/count)
 				       							);
 				       						$("div.status_"+folders+"_num").html('Uploading'+current+'/'+count + '....')
-				       						if(current == count){
-				       	 							$("div.status_"+folders).hide('slow')
-				       								$( "div.status_"+folders+'_faces').html('Uploaded: '+current+'/'+count);
-				       								$( "div.status_"+folders+'_num').html('Faces Recognized: '+recognized+'/'+faces);
-				       								$('#file_upload').uploadify('disable', false);
-				       							}
-				       						});
+				       						if(current == count)
+				       						{
+				       	 						$("div.status_"+folders).hide('slow')
+				       							$( "div.status_"+folders+'_faces').html('Uploaded: '+current+'/'+count);
+				       							$( "div.status_"+folders+'_num').html('Faces Recognized: '+recognized+'/'+faces);
+				       							$('#file_upload').uploadify('disable', false);
+			       							    $.ajax({
+											     	async: false,
+											     	type: 'GET',
+											     	url: './faces.php?u='+<?php echo $user_id ?>,
+											     	success: function(data1){
+															//$('div.faces').html(data1);
+													}
+												})
+				       						}
+				       					});
 				       				}
 
 				       			})

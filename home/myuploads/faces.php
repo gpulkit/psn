@@ -75,7 +75,7 @@ $(document).ready(function(){
 	if($result == 0)
 		echo mysql_error($conn);
         $count = mysql_num_rows($result);
-        echo $count.' outstanding faces<br/>';
+        echo $count.' outstanding faces<br/><br/>';
 
         if(mysql_num_rows($result) == 0)
         {

@@ -1,5 +1,6 @@
 <?php
 require_once('../../config.php');
+require_once('../../mail/php');
 if(isset($_REQUEST['u']))
 {
 	$user_id = 	mysql_real_escape_string($_REQUEST['u']);
@@ -13,7 +14,9 @@ if(isset($_REQUEST['u']))
 	{
 		if(mysql_num_rows($result) == 0)
 		{
-			
+			//send email
+                      //  echo smtpmailer('gpulkit@umich.edu','Photos@photosharingnetwork.com','Photo Sharing Network','test3','testbody');
+			//add to face
 		}
 		else
 		{

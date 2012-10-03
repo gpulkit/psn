@@ -209,7 +209,7 @@ function printEvents($email=0, $user_id = 0, $page = 1) {
 
 		$result2 = mysql_query("SELECT image_id FROM useruploads WHERE user_id = '$user_id'");
 		$timestamp = 500;
-		if(mysql_num_rows($result) == 0)
+		if(mysql_num_rows($result2) == 0)
 			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/NewGallery.JPG', $timestamp, false, false);
 		else
 		{
