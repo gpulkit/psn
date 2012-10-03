@@ -94,16 +94,10 @@ Photo Sharing Network
 
 <div class="contentwrapper"> 
 <div class="content">
- 
+ <a href='Create New Collaborative Album'></a>
 <?php
 
 if(isset($event)) {
-/*
-	echo "
-	<script type='text/javascript'>
-		showEvent(".$event.");
-	</script>";
-*/
 	printEventPictures($user_id, $event,$page);
 } else {
 	printEvents($email, $user_id, $page);
