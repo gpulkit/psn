@@ -61,7 +61,8 @@
 							$count=0;
 							foreach ($photo->tags as $tag)
 							{
-								echo $tag->width." ".$tag->height;
+								echo $tag->tid.'<br/>';
+								//echo $tag->width." ".$tag->height;
 
 								if(($tag->width < 6.0) || ($tag->height < 6.0))
 									continue;
