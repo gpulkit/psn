@@ -1,6 +1,5 @@
 <?php
-require_once 'config.php';
-require_once './src/class.phpmailer.php';
+//require_once 'config.php';
 $error ='';
 
 function smtpmailer($to, $from, $from_name, $subject, $body) { 
@@ -25,11 +24,12 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
     if(!$mail->Send()) 
     {
         $error = 'Mail error: '.$mail->ErrorInfo;
-        return false;
+        //return false;
     } else {
         $error = 'Message sent!';
-        return true;
+        //return true;
     }
+    return $error;
 }
 
 //echo smtpmailer('gpulkit@umich.edu','Photos@photosharingnetwork.com','Photo Sharing Network','test3','testbody');

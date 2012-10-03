@@ -115,7 +115,7 @@ $(document).ready(function(){
 		     		type: "GET",
 		     		url: "./face_invitation.php?u='.$user_id.'&v="+$(this).val()+"&f="+$(this).attr("id"),
 		     		success: function(data1){
-		     			//alert(data1);
+		     			alert(data1);
 		     		}
 		     	})
 		     	$(this).parents("tr").hide("slow");
@@ -184,7 +184,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<div class="facebox">
-					<div class = "link" style="display: <?php if(isset($token)) echo 'block'; else echo 'block';?>"> 
+					<div class = "link" style="display: <?php if(isset($token)) echo 'none'; else echo 'block';?>"> 
 						<!--<?php echo '<a href="'.$auth.'" ><img src="example.jpg"/></a>';?>-->
 						<?php echo '<a href="'.$auth.'" >Enable auto-fill</a>';?>
 					</div>
@@ -286,7 +286,7 @@ $(document).ready(function(){
 				       						$("div.status_"+folders).progressbar(
 				       							"value",(current*100/count)
 				       							);
-				       						$("div.status_"+folders+"_num").html('Uploading'+current+'/'+count + '....')
+				       						$("div.status_"+folders+"_num").html('Uploading '+current+'/'+count + '....')
 				       						if(current == count)
 				       						{
 				       	 						$("div.status_"+folders).hide('slow')
