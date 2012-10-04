@@ -175,7 +175,7 @@ else {
          <tr>
           <td><div class="small" align="center"></div></td>
            <td width="20px"></td>
-          <td width="194px"><div class="small" align="center">*Please note: We do NOT post anything to your FB account. EVER.</div></td>
+          <td width="194px"><div class="small" align="center">*Please note: We will NOT post anything to your FB account. EVER.</div></td>
         </tr>
       </table>
     </div>

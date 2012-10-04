@@ -161,6 +161,12 @@ $(document).ready(function(){
 </head>
 
 <body>
+	<div id='light' class='white_content'>
+		<iframe id='pictureframe' src="" width="700" height="400"> </iframe>
+	</div>
+	<div id='fade' class='black_overlay'>
+	</div>
+
 	<div align="center">
 		<div align="left">
 		<div class="header">
@@ -328,6 +334,12 @@ $(document).ready(function(){
 'onQueueComplete' : function(queueData) {
 
 },
+'onFallback' : function() {
+            	parent.document.getElementById('pictureframe').src='<?php echo "soon3.html";?>';
+            	document.getElementById('light').style.display='block';
+            	document.getElementById('fade').style.display='block';
+
+        },
     'onSelectError' : function() {
             alert('The file ' + file.name + ' returned an error and was not added to the queue.');
         },
