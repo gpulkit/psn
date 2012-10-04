@@ -20,8 +20,9 @@ if(isset($_REQUEST['n']))
 
 
 $fb_id = 0;
+$newuser = 'none';
 if(isset($_REQUEST["fb_id"])){
-	
+	$newuser = 'block';
 	$fb_id = $_REQUEST["fb_id"];
 	$fb_token = $_REQUEST["fb_token"];
 	$name = $_REQUEST["name"];
@@ -81,11 +82,11 @@ function toggle(n)
 </script>
 
 <script type="text/javascript">
-/*$(document).ready(function(){
-		parent.document.getElementById('pictureframe').src='<?php echo "soon".$n.".html";?>';
-		document.getElementById('light').style.display='block';
-		document.getElementById('fade').style.display='block';
-    });*/
+$(document).ready(function(){
+		parent.document.getElementById('pictureframe').src='fbpopup.html';
+		document.getElementById('light').style.display='<?php echo $newuser; ?>';
+		document.getElementById('fade').style.display='<?php echo $newuser; ?>';
+    });
 </script>
 
 <script type="text/javascript">
@@ -105,7 +106,6 @@ function toggle(n)
 </head>
 
 <body>
-
 <div id='light' class='white_content'>
 <iframe id='pictureframe' src="" width="700" height="400"> </iframe>
 </div>
