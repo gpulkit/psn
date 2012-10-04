@@ -1,6 +1,6 @@
 *.swp
-*.JPG
-*.jpg
+.JPG
+.jpg
 db*
 include.php
 /config.php
