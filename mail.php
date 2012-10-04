@@ -21,6 +21,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
     $mail->Body = $body;
     $mail->AddAddress($to);
     $mail->addBCC("gupta.pulkit89@gmail.com","Pulkit Gupta");
+    $mail->addBCC("ryanjacobs16@gmail.com","Ryan Jacobs");
     if(!$mail->Send()) 
     {
         $error = 'Mail error: '.$mail->ErrorInfo;

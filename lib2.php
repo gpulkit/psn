@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+
 if(isset($_POST['f']))
 {
 	if($_POST['f'] == 'event')
@@ -44,10 +45,10 @@ function printUserPictures($user_id = 0, $page = 1, $folder = "photos") {
 	//*******************
 	echo '<div class="frame_options">';
 	if ($folder == "processed") {
-		echo '<input onclick="toggle(\'photos\')" id="framedcheckbox1"  type="checkbox"  checked="checked" value="framed" /> Framed Photos';
+		//echo '<input onclick="toggle(\'photos\')" id="framedcheckbox1"  type="checkbox"  checked="checked" value="framed" /> Framed Photos';
 	
 	} else {
-		echo '<input onclick="toggle(\'processed\')" id="framedcheckbox1"  type="checkbox"  value="framed" /> Framed Photos';
+		//echo '<input onclick="toggle(\'processed\')" id="framedcheckbox1"  type="checkbox"  value="framed" /> Framed Photos';
 	}
 	echo '</div>';
 
@@ -76,19 +77,21 @@ function printUserPictures($user_id = 0, $page = 1, $folder = "photos") {
 	$i = 0;
 	while ( ($row = mysql_fetch_array($result, MYSQL_ASSOC))){// && ($i < $pictures_per_page) ) {
 		$image_id = $row['image_id'];
-		$result2 = mysql_query("SELECT event_id FROM event_images WHERE image_id = '$image_id'" , $conn);
-		$row2 = mysql_fetch_array($result2, MYSQL_ASSOC);	
-		$event_id = $row2['event_id'];
-
 		$i++;
 		$timestamp = timestamp();
                 if($row['event'] == 1)
-                {
+                {		
+                    $result2 = mysql_query("SELECT event_id FROM event_images WHERE image_id = '$image_id'" , $conn);
+		    $row2 = mysql_fetch_array($result2, MYSQL_ASSOC);	
+		    $event_id = $row2['event_id'];
 	  	    $image_link = $s3->getAuthenticatedURL($bucket,$folder.'/'.$event_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);
 		    $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_'.$folder.'/'.$event_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
                 }
                 else 
                 {
+                    $result2 = mysql_query("SELECT user_id FROM useruploads WHERE image_id = '$image_id'" , $conn);
+		    $row2 = mysql_fetch_array($result2, MYSQL_ASSOC);	
+		    $user_id = $row2['user_id'];
 	  	    $image_link = $s3->getAuthenticatedURL($bucket,'uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);
 		    $thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
                 }
@@ -190,7 +193,7 @@ function printEvents($email=0, $user_id = 0, $page = 1) {
 	$pictures_per_page = 48;
 
 	#$result = mysql_query("SELECT event_id from users_events WHERE email = '$email'");
-	$result = mysql_query("SELECT event_id FROM events WHERE org_id = (SELECT org_id FROM users WHERE user_id = '$user_id') UNION SELECT event_id FROM users_events WHERE email = '$email'");
+	$result = mysql_query("SELECT event_id FROM events WHERE org_id = (SELECT org_id FROM users WHERE user_id = '$user_id') OR event_id = 4 UNION SELECT event_id FROM users_events WHERE email = '$email'");
 
 	if($result==0) {
 		echo mysql_error($conn);
@@ -210,11 +213,12 @@ function printEvents($email=0, $user_id = 0, $page = 1) {
 		$result2 = mysql_query("SELECT image_id FROM useruploads WHERE user_id = '$user_id'");
 		$timestamp = 500;
 		if(mysql_num_rows($result2) == 0)
-			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/NewGallery.JPG', $timestamp, false, false);
+			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/MyUploadsCover.jpg', $timestamp, false, false);
 		else
 		{
 			$row = mysql_fetch_array($result2, MYSQL_ASSOC);
 			$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_uploads/'.$user_id.'/'.$row["image_id"].'.jpg', $timestamp, false, false);	
+			#$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/MyUploadsCover.jpg', $timestamp, false, false);
 		}
 	
 	echo '<div style="clear:both"></div>';
@@ -289,7 +293,7 @@ function printEventPictures($user_id, $event_id, $page = 1, $folder = "processed
 	echo ' :: '; 
 	if($count) {
 		$row = mysql_fetch_array($result, MYSQL_ASSOC);
-		echo '<a onclick="showEvent('.$row["event_id"].')"  href="javascript:void(0);">';
+		echo '<a onclick=""  href="javascript:void(0);">';
 		echo $row["name"];
 		echo '</a>'; 
 		mysql_data_seek($result, 0);
@@ -301,10 +305,10 @@ function printEventPictures($user_id, $event_id, $page = 1, $folder = "processed
 	//*******************
 	echo '<div class="frame_options">';
 	if ($folder == "processed") {
-		echo '<input onclick="toggle(\'photos\')" id="framedcheckbox2"  type="checkbox"  checked="checked" value="framed" /> Framed Photos';
+		//echo '<input onclick="toggle(\'photos\')" id="framedcheckbox2"  type="checkbox"  checked="checked" value="framed" /> Framed Photos';
 	
 	} else {
-		echo '<input onclick="toggle(\'processed\')" id="framedcheckbox2"  type="checkbox"  value="framed" /> Framed Photos';
+		//echo '<input onclick="toggle(\'processed\')" id="framedcheckbox2"  type="checkbox"  value="framed" /> Framed Photos';
 	}
 
 	echo '</div>';
@@ -330,7 +334,27 @@ function printEventPictures($user_id, $event_id, $page = 1, $folder = "processed
 	// Print content
 	//*******************
 	//mysql_data_seek($result, ($page-1)*$pictures_per_page );
-	
+	if($event_id == 4)
+        {
+                $timestamp = timestamp();
+		$image_link = $s3->getAuthenticatedURL($bucket,'photos/'.$event_id.'/0.jpg', $timestamp, false, false);
+		$thumb_link = $s3->getAuthenticatedURL($bucket,'thumbs_photos/'.$event_id.'/0.jpg', $timestamp, false, false);	
+		$description = "No description";
+		$title = "Full Image";
+		echo '<div class="thumb_container">';
+		echo '<div class="thumb_div">';
+		//echo '<a   target="_new" class="thumb" href="'.$imgsrc.'">';
+		//echo '<div class="overlay_download"> Download </div>';
+		//echo '</a>';
+		echo '<div class="thumb_pic">';
+		echo '<a class="thumb" href="'.$image_link.'">';
+        	echo '<img src="'.$thumb_link.'" title="'.$title.'" />';
+        	echo '</a>';
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+        }
+
 	$i = 0;
 	while (($row = mysql_fetch_array($result, MYSQL_ASSOC))) {
 		

@@ -1,4 +1,5 @@
 <? 
+session_set_cookie_params(0, '/', '.photosharingnetwork.com');
 session_start();
 require_once('config.php'); 
 require_once("Mobile_Detect.php");
@@ -139,11 +140,12 @@ else {
     </div>
 
     <div class="imagebox">
-      <img src='./img/site/you.png' width='600px' height='500px'/>
+      <img src='./img/site/you.png' width='600px' height='500px' style="border:black 3px solid;"/>
     </div>
     <div class="optionsbox" align="center">
-      <br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/>
       
+      <div><font size="3px">For this to work, we'll need to train our system with a few photos of you.</font></div><br/>
       <div><font size="6px">Upload from:</font></div>
       <br/><br/>
       <div align="center" style="margin-left:0px;">

@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0, '/', '.photosharingnetwork.com');
 session_start();
 require_once("../lib2.php");
 require_once("../FaceRestClient.php");

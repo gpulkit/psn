@@ -7,8 +7,10 @@ require_once('./phpThumb/phpthumb.class.php');
 $app_dir = './process';
 require_once('./process/orgs.php');
 
-$event = 13;
-search();
+$event = 4;
+
+//search();
+read_event_folder($event);
 
 function search()
 {
@@ -189,7 +191,8 @@ function read_event_folder($event)
     		if ($file != "." && $file != "..")
 	 	 	{
 	 	 		echo $file.'<br/><br/>';
-	 	 		$query_str = "INSERT INTO event_images (event_id) VALUES ('$event')";
+	 	 		/*
+                                $query_str = "INSERT INTO event_images (event_id) VALUES ('$event')";
 	 	 		$result = mysql_query($query_str);
 	 	 		
 	 	 		if($result == 0) {
@@ -198,6 +201,8 @@ function read_event_folder($event)
 	 	 		}
 
 	 	 		$image_id = mysql_insert_id();
+                                */
+	 	 		$image_id = 0;
 	 	 		
 	 	 		s3rename('photos',$bucket,$file,$event,$image_id);
 				

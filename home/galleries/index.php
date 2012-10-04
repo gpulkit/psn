@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0, '/', '.photosharingnetwork.com');
 
 session_start();
 require_once("../../lib2.php");
@@ -28,8 +29,11 @@ if(isset($_GET["p"])) {
 	$page = $_GET["p"];
 }
 
+
+$event2='';
 if(isset($_GET["e"])) {
 	$event = $_GET["e"];
+	$event2 = $_GET["e"];
 	//$n = mysql_num_rows(mysql_query("SELECT * FROM users_events WHERE email = '$email' AND event_id = '$event'"));
 	//if($n == 0)
 		//header('Location: .');
@@ -55,7 +59,7 @@ function toggle(n)
 	$('div.content').load(
 		'../../lib2.php',
 		{f:'event',
-		event_id:'<?php echo $event ?>',
+		event_id:'<?php echo $event2 ?>',
 		folder: n});
 }
 
@@ -99,7 +103,6 @@ function toggle(n)
 
 <div class="contentwrapper"> 
 <div class="content">
- <a href='Create New Collaborative Album'></a>
 <?php
 
 if(isset($event)) {

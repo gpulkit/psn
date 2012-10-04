@@ -1,5 +1,5 @@
 <?php
-
+session_set_cookie_params(0, '/', '.photosharingnetwork.com');
 session_start();
 
 include("../lib2.php");

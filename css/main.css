@@ -143,21 +143,21 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	margin-top:20px;	
 	width:1030px;
 	text-align:left;
-	font-size:40px;
-	margin-bottom:20px;
+	font-size:30px;
+	margin-bottom:70px;
 	font-weight:600;
 }
 
 .header img{
-	width:280px;
-	height:75px;
+	width:480px;
+	height:100px;
 	float:right;
 }
 
 .header span {	margin-top:15px;	
 	width:1200px;
 	text-align:left;
-	font-size:20px;
+	font-size:10px;
 	margin-bottom:20px;
 	font-weight:50;
 }
@@ -294,7 +294,7 @@ src: url('./Ubuntu-R.ttf'), url('./Ubuntu-R.eot');
 	padding-top: 18px;
 	float:left;	
 	width:400px;
-	min-height:300px;
+	min-height:350px;
 	text-align:left;
 	border: 3px white solid;
 	background-color:#000000;

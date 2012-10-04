@@ -1,12 +1,5 @@
 <?php
-require_once "google-api-php-client/src/apiClient.php";
-require_once "google-api-php-client/src/contrib/apiPlusService.php";
-
-$clientid = '168031654337-qalpj3vi6ssq29qcsn0dgvhlo0cl9eas.apps.googleusercontent.com';
-$clientsecret = 'p23gk7-fKrfmYdEK4XP97ogG';
-$redirecturi = 'http://localhost.com:8888/google.php';
-$developerkey ='AIzaSyCnW3DWh4Fj3QaiLaydghqRLI30m4SBLRU';
-
+require_once "config.php";
 $client = new apiClient();
 $client->setApplicationName('Google Contacts PHP Sample');
 $client->setScopes("http://www.google.com/m8/feeds/");

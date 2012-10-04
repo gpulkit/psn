@@ -72,25 +72,26 @@ $(document).ready(function(){
 		</script>';
 
 	}
-        echo 'Easy Share Assist <br/>';
-
 	$result = mysql_query("SELECT face_id FROM faces WHERE image_id = ANY (SELECT image_id FROM useruploads WHERE user_id = '$user_id') AND email IS NULL ORDER BY face_id DESC");
 	if($result == 0)
 		echo mysql_error($conn);
-        $count = mysql_num_rows($result);
-        echo $count.' outstanding faces<br/><br/>';
+        $count = mysql_num_rows($result);               
+        echo '<font size="5px">PSN Easy Sharing Assistant</font><br/><br/>
+                                                        This helps you privately share the photos our system doesn\'t automatically recognize.<br/><br/>';
+
+      echo '<span class="count">'.$count.'</span> outstanding faces to identify (photos to share)<br/><br/>';
 
         if(mysql_num_rows($result) == 0)
         {
             return;
         }
-	echo '<table>';
+	echo '<table style="border-spacing:2em;">';
 	while($row = mysql_fetch_array($result,MYSQL_ASSOC))
 	{
 		$face_id = $row['face_id'];
 		$timestamp = 500;
 		$url = $s3->getAuthenticatedURL($bucket,'faces/'.$face_id.'.jpg', $timestamp,false, false);	
-		echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px"></td><td><input id="'.$face_id.'" type="text" style="font-color:grey; width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
+		echo '<tr class="'.$face_id.'"><td><img src="'.$url.'" height="100px" width="70px" style="border: 3px white solid;"></td><td><input id="'.$face_id.'" type="text" style="font-color:grey; width:200px;" value="Enter e-mail address here to share!"/></td></tr>';
 	}
 	echo '</table>';
 }

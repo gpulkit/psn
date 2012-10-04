@@ -13,6 +13,19 @@ if(isset($_REQUEST['ec']))
 	$ec = mysql_real_escape_string($_REQUEST['ec']);
 }
 
+if(isset($_REQUEST['e']))
+{
+	$email = mysql_real_escape_string($_REQUEST['e']);
+}
+$ww ='block';
+if(isset($_REQUEST['ww']))
+{
+	$ww = mysql_real_escape_string($_REQUEST['ww']);
+        $ww = 'none';
+}
+
+
+
 if(isset($_REQUEST['u']))
 {
 	$campus_id = mysql_real_escape_string($_REQUEST['u']);
@@ -30,7 +43,7 @@ if($result == 0)
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Photo Sharing Network</title>
-	<link rel="stylesheet" type="text/css" href="./css/main.css??" />
+	<link rel="stylesheet" type="text/css" href="./css/main.css?v=1" />
 	<?php if( $detect->isMobile() ) : ?>
 	<link rel="stylesheet" type="text/css" href="./css/mobile_main.css" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
@@ -52,7 +65,15 @@ _gaq.push(['_trackPageview']);
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
+</script>	
+<script type="text/javascript">
+	$(document).ready(function(){
+		parent.document.getElementById("pictureframe").src='<?php echo "soon.html?";?>';
+		document.getElementById('light').style.display='<?php echo $ww; ?>';
+		document.getElementById('fade').style.display='<?php echo $ww;?>';
+	});
 </script>
+
 <script type="text/javascript">
 var j=0;
 function validate_form(i)
@@ -148,7 +169,13 @@ function validate_form(i)
 
 </head>
 
-<body>
+<body>	
+        <div id='light' class='white_content'>
+		<iframe id='pictureframe' src="" width="700" height="400"> </iframe>
+	</div>
+	<div id='fade' class='black_overlay'>
+	</div>
+
 	<?php if( $detect->isMobile() ) : ?>
 	<div align="left">
 	<?php else : ?>
@@ -189,7 +216,7 @@ function validate_form(i)
 								<td colspan='2'><h2>New Users</h2></td>
 							</tr>
 							<tr>
-								<td>E-mail</td> <td> <input name="username" type="text" id="frm_username" value=''  class="username_return"/>  </td> <td class='e_u'></td>
+								<td>E-mail</td> <td> <input name="username" type="text" id="frm_username" value='<?php if(isset($email)) echo $email;?>'  class="username_return"/>  </td> <td class='e_u'></td>
 							</tr>
 							<tr>
 								<td>Password</td> <td> <input name="password1" type="password" />  </td> <td class='e_p1'></td>
