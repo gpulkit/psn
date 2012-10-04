@@ -113,9 +113,15 @@ function toggle(n)
 
 <div align="center">
 
-<div class="header">
-Photo Sharing Network
-</div>
+	<div align="left">
+	<div class="header">
+		Photo Sharing Network <span>[Advanced Beta Release]</span> 
+		<a href="mailto:info@photosharingnetwork.com">
+			<img src="../img/site/Hello.jpg" width="320px" height="75px" style="float:right;"/>
+		</a>
+	</div>
+	</div>
+
 <div class="contentheader_wrapper"><div class="contentheader">
 
 <div class="currenttab"><a href=".">Photos of Me</a></div>

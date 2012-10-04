@@ -11,7 +11,6 @@ else
 {
   header('Location: .');
 }
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -116,11 +115,16 @@ else {
   <?php endif ?>
 
 
-  <div class="header">Photo Sharing Network <span>[Advanced Beta Release]</span></div>
+  <div align="left">
+  <div class="header">
+    Photo Sharing Network <span>[Advanced Beta Release]</span> 
+    <img src="./img/site/Hello.jpg" width="320px" height="75px" style="float:right;"/>
+  </div>
+  </div>
 
   <div class="setupcontentheader_wrapper">
     <div class="setupcontentheader">
-      <div class="currenttab">Welcome</div>
+      <div class="currenttab">Registration</div>
     </div>
   </div>
 
@@ -141,26 +145,37 @@ else {
       <br/><br/><br/><br/><br/><br/><br/><br/>
       
       <div><font size="6px">Upload from:</font></div>
-      <br/><br/><br/><br/>
-      <div align="center">
+      <br/><br/>
+      <div align="center" style="margin-left:0px;">
       <table>
         <tr>
+          <td><div class="small" align="center"></div></td>
+           <td width="20px"></td>
+          <td><div class="small" align="center">(Express Method)</div></td>
+        </tr>
+        <tr>
           <td><a href="javascript:void(0);" onclick="alert('We re still building this feature. In the meantime, please use the FB Login.')"> 
-        <div class="bigbutton" style="padding-top:20px; height:56px">Upload Photos</div>
+        <div class="bigbutton" style="padding-top:20px; height:56px">My Computer</div>
         </a>
           </td>
           <td width="20px">
+            Or
           </td>
           <td>
             <a href="javascript:void(0);"> 
-            <div class="bigbutton" id="fb">Select from Facebook </div>
+            <div class="bigbutton" id="fb" style="padding-top:20px; height:56px">Facebook</div>
             </a>
           </td>
         </tr>
         <tr>
           <td><div class="small" align="center">(Manually select photos)</div></td>
            <td width="20px"></td>
-          <td><div class="small" align="center">(2 Click Auto Detect)</div></td>
+          <td><div class="small" align="center">(Two-Click Auto Detect)</div></td>
+        </tr>
+         <tr>
+          <td><div class="small" align="center"></div></td>
+           <td width="20px"></td>
+          <td width="194px"><div class="small" align="center">*Please note: We do NOT post anything to your FB account. EVER.</div></td>
         </tr>
       </table>
     </div>

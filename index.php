@@ -155,10 +155,15 @@ function validate_form(i)
 	<div align="center">
 	<?php endif ?>
 
-
+	<div align="left">
 	<div class="header">
 		Photo Sharing Network <span>[Advanced Beta Release]</span> 
+		<a href="mailto:info@photosharingnetwork.com">
+		<img src="./img/site/Hello.jpg"/>
+		</a>
 	</div>
+	</div>
+	
 
 
 	<div class="contentheader_wrapper">

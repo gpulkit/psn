@@ -357,7 +357,11 @@ function printEventPictures($user_id, $event_id, $page = 1, $folder = "processed
 	if($event_id == 0)
 	{
 		$result = mysql_query("SELECT image_id FROM useruploads WHERE user_id = '$user_id'");
-
+		if(mysql_num_rows($result) == 0)
+		{
+			echo '<div class="mainmessage">Head to the My Uploads tab and let\'s get this party started!</div>';
+			echo '<div style="clear:both"></div>';
+		}
 		while (($row = mysql_fetch_array($result, MYSQL_ASSOC))) {		
 			$i++;
 			$timestamp = timestamp();
